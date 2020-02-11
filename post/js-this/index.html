@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>this - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Ivy Lei" /><meta name="description" content="This All code test in Chrome Version 76.0.3809.132 (Official Build) (32-bit) 1. this 是什么 this 实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用 this 既不指向函数自身也不指向函数的词法" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.63.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/js-this/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="this" />
+<meta property="og:description" content="This All code test in Chrome Version 76.0.3809.132 (Official Build) (32-bit) 1. this 是什么 this 实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用 this 既不指向函数自身也不指向函数的词法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/js-this/" />
+<meta property="article:published_time" content="2020-01-27T16:49:39+08:00" />
+<meta property="article:modified_time" content="2020-01-27T16:49:39+08:00" />
+<meta itemprop="name" content="this">
+<meta itemprop="description" content="This All code test in Chrome Version 76.0.3809.132 (Official Build) (32-bit) 1. this 是什么 this 实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用 this 既不指向函数自身也不指向函数的词法">
+<meta itemprop="datePublished" content="2020-01-27T16:49:39&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-27T16:49:39&#43;08:00" />
+<meta itemprop="wordCount" content="2840">
+
+
+
+<meta itemprop="keywords" content="JavaScript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="this"/>
+<meta name="twitter:description" content="This All code test in Chrome Version 76.0.3809.132 (Official Build) (32-bit) 1. this 是什么 this 实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用 this 既不指向函数自身也不指向函数的词法"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Ivy Lei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Ivy Lei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">this</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-27 </span>
+        <div class="post-category">
+            <a href="/categories/javascript/"> JavaScript </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-this-是什么">1. this 是什么</a></li>
+    <li><a href="#2-绑定规则">2. 绑定规则</a>
+      <ul>
+        <li><a href="#21-默认绑定">2.1. 默认绑定</a></li>
+        <li><a href="#22-隐式绑定">2.2. 隐式绑定</a></li>
+        <li><a href="#23-显示绑定">2.3. 显示绑定</a></li>
+        <li><a href="#24-new绑定">2.4. new绑定</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-绑定的优先级">3. 绑定的优先级</a></li>
+    <li><a href="#4-绑定例外">4. 绑定例外</a>
+      <ul>
+        <li><a href="#41-忽略-this">4.1 忽略 this</a></li>
+        <li><a href="#42-间接引用">4.2 间接引用</a></li>
+        <li><a href="#43-软绑定">4.3 软绑定</a></li>
+        <li><a href="#44-监听函数内部的-this">4.4 监听函数内部的 this</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-this-词法">5. this 词法</a></li>
+    <li><a href="#6-总结">6. 总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="this">This</h1>
+<p><em>All code test in Chrome Version 76.0.3809.132 (Official Build) (32-bit)</em></p>
+<hr>
+<h2 id="1-this-是什么">1. this 是什么</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox">this 实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用
+<del>this 既不指向函数自身也不指向函数的词法作用域</del></li>
+</ul>
+<h2 id="2-绑定规则">2. 绑定规则</h2>
+<p>每个函数的 this 是在调用时被绑定的，完全取决于函数的调用位置</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox">调用位置就是函数在代码中被调用的位置
+<del>而不是声明的位置</del></li>
+</ul>
+<h3 id="21-默认绑定">2.1. 默认绑定</h3>
+<p>独立函数调用（<em>直接使用不带任何修饰的函数引用进行调用</em>）使用的就是默认绑定</p>
+<p>默认绑定会把 this 绑到全局对象 or undefined</p>
+<p>运行在非 strict mode 下时，默认绑定才能绑定到全局对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">//exp 1
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">foo</span><span class="p">(</span><span class="p">)</span><span class="p">;</span><span class="c1">// 2
+</span><span class="c1"></span>
+<span class="c1">//exp 2
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">foo1</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s2">&#34;use strict&#34;</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">foo1</span><span class="p">(</span><span class="p">)</span><span class="p">;</span><span class="c1">// TypeError: this is undefined
+</span><span class="c1"></span>
+<span class="c1">//exp 3
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">foo3</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span>
+    <span class="s2">&#34;use strict&#34;</span><span class="p">;</span>
+    <span class="nx">foo3</span><span class="p">(</span><span class="p">)</span><span class="p">;</span><span class="c1">// 2
+</span><span class="c1"></span><span class="p">}</span><span class="p">)</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="22-隐式绑定">2.2. 隐式绑定</h3>
+<p>调用位置有上下文对象的使用隐式绑定</p>
+<p>隐式绑定会把 this 绑定到这个上下文对象</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">//exp 1
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span><span class="c1"></span>
+<span class="c1">//exp 2
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">42</span><span class="p">,</span>
+    <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">obj2</span><span class="o">:</span> <span class="nx">obj2</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="nx">obj1</span><span class="p">.</span><span class="nx">obj2</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 42
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>有些情况（<em><strong>赋值</strong></em>）会让人误以为要使用隐式绑定，其实是要用默认绑定的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">//exp 1
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">;</span> <span class="c1">// 函数别名！
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">&#34;oops, global&#34;</span><span class="p">;</span> <span class="c1">// a 是全局对象的属性
+</span><span class="c1"></span><span class="nx">bar</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// &#34;oops, global&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>bar 是 obj.foo 的一个引用，但是实际上，它引用的是 foo 函数本身，因此此时的 bar() 其实是一个不带任何修饰的函数调用，因此应用了默认绑定</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">//exp 1
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">doFoo</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// fn 其实引用的是foo
+</span><span class="c1"></span>    <span class="nx">fn</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// &lt;-- 调用位置！
+</span><span class="c1"></span><span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">&#34;oops, global&#34;</span><span class="p">;</span> <span class="c1">// a 是全局对象的属性
+</span><span class="c1"></span><span class="nx">doFoo</span><span class="p">(</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// &#34;oops, global&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>参数传递其实就是一种隐式赋值，因此我们传入函数时也会被隐式赋值，所以结果和上一个例子一样</p>
+<p>如果把函数传入语言内置的函数而不是传入你自己声明的函数，结果是一样的，没有区别</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">&#34;oops, global&#34;</span><span class="p">;</span> <span class="c1">// a 是全局对象的属性
+</span><span class="c1"></span><span class="nx">setTimeout</span><span class="p">(</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">foo</span><span class="p">,</span> <span class="mi">100</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// &#34;oops, global&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>JavaScript 环境中内置的setTimeout() 函数实现和下面的伪代码类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span><span class="nx">delay</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 等待delay 毫秒
+</span><span class="c1"></span>    <span class="nx">fn</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// &lt;-- 调用位置！
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="23-显示绑定">2.3. 显示绑定</h3>
+<p>使用函数的 call(..) 和 apply(..) 方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span><span class="mi">2</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><p>bind(..) 方法也可以</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">something</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">,</span> <span class="nx">something</span> <span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="nx">something</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span><span class="mi">2</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span> <span class="nx">obj</span> <span class="p">)</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">bar</span><span class="p">(</span> <span class="mi">3</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2 3
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">b</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 5
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="24-new绑定">2.4. new绑定</h3>
+<p>使用 new 来调用函数时会构造一个新对象并把它绑定到函数调用中的 this 上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">foo</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">bar</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><input checked="" disabled="" type="checkbox">JavaScript 的所有函数（包含内置对象函数 如： Number(..)）都可以用 new 来调用
+<del>JavaScript 不存在所谓的“构造函数”</del>，只有对于函数的“构造调用”</li>
+</ul>
+<h2 id="3-绑定的优先级">3. 绑定的优先级</h2>
+<p><strong>new绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</strong></p>
+<p><strong>显示绑定 vs 隐式绑定</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="nx">obj1</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 3
+</span><span class="c1"></span><span class="nx">obj1</span><span class="p">.</span><span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj2</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 3
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj1</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>显示绑定 vs 隐式绑定，显示绑定 wins</strong></p>
+<p><strong>new绑定 vs 隐式绑定</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">something</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">something</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span><span class="p">;</span>
+<span class="nx">obj1</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span> <span class="mi">2</span> <span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">obj1</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span><span class="c1"></span><span class="nx">obj1</span><span class="p">.</span><span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">obj2</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 3
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obj1</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span> <span class="mi">4</span> <span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">obj1</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">bar</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 4
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>new绑定 vs 隐式绑定，new绑定 wins</strong></p>
+<p><strong>new绑定 vs 显示绑定</strong>
+new 和 call / apply 无法一起使用，但是我们可以使用硬绑定来测试它俩的优先级</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">something</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">something</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span> <span class="nx">obj1</span> <span class="p">)</span><span class="p">;</span>
+<span class="nx">bar</span><span class="p">(</span> <span class="mi">2</span> <span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">obj1</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">baz</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">bar</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">obj1</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">baz</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 3
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>new绑定 vs 显示绑定，new绑定 wins</strong></p>
+<p>下面是 MDN 提供的一种 bind(..) 实现，有兴趣可以看看</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">oThis</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span> <span class="o">!==</span> <span class="s2">&#34;function&#34;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// 与 ECMAScript 5 最接近的
+</span><span class="c1"></span>                <span class="c1">// 内部 IsCallable 函数
+</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="nx">TypeError</span><span class="p">(</span>
+                <span class="s2">&#34;Function.prototype.bind - what is trying &#34;</span> <span class="o">+</span>
+                <span class="s2">&#34;to be bound is not callable&#34;</span>
+            <span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">aArgs</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">arguments</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span><span class="p">,</span>
+    <span class="nx">fToBind</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+    <span class="nx">fNOP</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span><span class="p">}</span><span class="p">,</span>
+    <span class="nx">fBound</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span>
+        <span class="k">return</span> <span class="nx">fToBind</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="k">this</span> <span class="k">instanceof</span> <span class="nx">fNOP</span> <span class="o">&amp;&amp;</span>
+                <span class="nx">oThis</span> <span class="o">?</span> <span class="k">this</span> <span class="o">:</span> <span class="nx">oThis</span>
+            <span class="p">)</span><span class="p">,</span>
+            <span class="nx">aArgs</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span>
+                <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">arguments</span> <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">}</span><span class="p">;</span>
+    <span class="nx">fNOP</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+    <span class="nx">fBound</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">fNOP</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">fBound</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-绑定例外">4. 绑定例外</h2>
+<h3 id="41-忽略-this">4.1 忽略 this</h3>
+<p>把 null 或者 undefined 作为 this 的绑定对象传入 call、apply 或者 bind，这些值在调用时会被忽略，实际应用的是默认绑定规则</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="kc">null</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><p>如果函数并不关心 this，但仍然需要传入一个占位值，这时 null 可能是一个不错的选择， 但更好的选择是传一个空对象给它 Object.create(null)</p>
+<p>Object.create(null) 和 {} 很像， 但是并不会创建 Object.prototype 这个委托，所以它比 {} 更空</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s2">&#34;a:&#34;</span> <span class="o">+</span> <span class="nx">a</span> <span class="o">+</span> <span class="s2">&#34;, b:&#34;</span> <span class="o">+</span> <span class="nx">b</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 我们的DMZ 空对象
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">ø</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span> <span class="kc">null</span> <span class="p">)</span><span class="p">;</span>
+<span class="c1">// 把数组展开成参数
+</span><span class="c1"></span><span class="nx">foo</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span> <span class="nx">ø</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// a:2, b:3
+</span><span class="c1"></span><span class="c1">// 使用bind(..) 进行柯里化
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span> <span class="nx">ø</span><span class="p">,</span> <span class="mi">2</span> <span class="p">)</span><span class="p">;</span>
+<span class="nx">bar</span><span class="p">(</span> <span class="mi">3</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// a:2, b:3
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="42-间接引用">4.2 间接引用</h3>
+<p>有时可能（有意或者无意地）创建一个函数的“间接引用”，在这种情况下，调用这个函数会应用默认绑定规则</p>
+<p>间接引用最容易在赋值时发生</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">foo</span><span class="o">:</span> <span class="nx">foo</span> <span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span><span class="p">;</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 3
+</span><span class="c1"></span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">foo</span><span class="p">)</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><p>赋值表达式 p.foo = o.foo 的返回值是目标函数的引用，因此调用位置是 foo() 而不是 p.foo() 或者 o.foo()，因此这里会应用默认绑定</p>
+<h3 id="43-软绑定">4.3 软绑定</h3>
+<p>硬绑定可以把 this 强制绑定到指定的对象（除了使用new时），防止函数调用应用默认绑定规则</p>
+<p>问题在于硬绑定会大大降低函数的灵活性，使用硬绑定之后就无法使用隐式绑定或者显式绑定来修改 this</p>
+<p>软绑定可以给默认绑定指定一个全局对象和 undefined 以外的值，实现和硬绑定相同的效果，同时保留隐式绑定或者显式绑定修改 this 的能力</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">softBind</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">softBind</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">fn</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="c1">// 捕获所有 curried 参数
+</span><span class="c1"></span>        <span class="kd">var</span> <span class="nx">curried</span> <span class="o">=</span> <span class="p">[</span><span class="p">]</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">arguments</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">bound</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span>
+                <span class="p">(</span><span class="o">!</span><span class="k">this</span> <span class="o">||</span> <span class="k">this</span> <span class="o">===</span> <span class="p">(</span><span class="nb">window</span> <span class="o">||</span> <span class="nx">global</span><span class="p">)</span><span class="p">)</span> <span class="o">?</span>
+                <span class="nx">obj</span> <span class="o">:</span> <span class="k">this</span><span class="p">,</span>
+                <span class="nx">curried</span><span class="p">.</span><span class="nx">concat</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span> <span class="nx">curried</span><span class="p">,</span> <span class="nx">arguments</span> <span class="p">)</span>
+            <span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span><span class="p">;</span>
+        <span class="nx">bound</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span> <span class="p">)</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">bound</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;name: &#34;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;obj&#34;</span> <span class="p">}</span><span class="p">,</span>
+<span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;obj2&#34;</span> <span class="p">}</span><span class="p">,</span>
+<span class="nx">obj3</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;obj3&#34;</span> <span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">fooOBJ</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">softBind</span><span class="p">(</span> <span class="nx">obj</span> <span class="p">)</span><span class="p">;</span>
+<span class="nx">fooOBJ</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// name: obj
+</span><span class="c1"></span><span class="nx">obj2</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">softBind</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">foo</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// name: obj2 &lt;---- 看！！！
+</span><span class="c1"></span><span class="nx">fooOBJ</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj3</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// name: obj3 &lt;---- 看！
+</span><span class="c1"></span><span class="nx">setTimeout</span><span class="p">(</span> <span class="nx">obj2</span><span class="p">.</span><span class="nx">foo</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span><span class="p">;</span>
+<span class="c1">// name: obj &lt;---- 应用了软绑定
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="44-监听函数内部的-this">4.4 监听函数内部的 this</h3>
+<p>监听函数内部的 this，指向当前事件所在的那个对象</p>
+<h2 id="5-this-词法">5. this 词法</h2>
+<p>ES6 中的箭头函数并不会使用四条标准的绑定规则，而是根据当前的词法作用域来决定 this</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 返回一个箭头函数
+</span><span class="c1"></span>    <span class="k">return</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">//this 继承自foo()
+</span><span class="c1"></span>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span><span class="mi">2</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span><span class="mi">3</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj1</span> <span class="p">)</span><span class="p">;</span>
+<span class="nx">bar</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj2</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2, 不是3 ！
+</span></code></pre></td></tr></table>
+</div>
+</div><p>箭头函数最常用于回调函数中，例如事件处理器或者定时器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// 这里的this 在此法上继承自foo()
+</span><span class="c1"></span>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span><span class="mi">2</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><p>实际上，在 ES6 之前我们就已经在使用一种几乎和箭头函数完全一样的模式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// lexical capture of this
+</span><span class="c1"></span>    <span class="nx">setTimeout</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span><span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">self</span><span class="p">.</span><span class="nx">a</span> <span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">,</span> <span class="mi">100</span> <span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span>
+<span class="p">}</span><span class="p">;</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span> <span class="nx">obj</span> <span class="p">)</span><span class="p">;</span> <span class="c1">// 2
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6-总结">6. 总结</h2>
+<p>如果要判断一个运行中函数的 this 绑定，就需要找到这个函数的直接调用位置，找到之后就可以顺序应用下面这四条规则来判断 this 的绑定对象</p>
+<ol>
+<li>由 new 调用？绑定到新创建的对象</li>
+<li>由 call 或者 apply（或者 bind）调用？绑定到指定的对象</li>
+<li>由上下文对象调用？绑定到那个上下文对象</li>
+<li>默认：在严格模式下绑定到 undefined，否则绑定到全局对象</li>
+</ol>
+<p>一定要注意，有些调用可能在无意中使用默认绑定规则</p>
+<p>如果想“更安全”地忽略 this 绑定，你可以使用一个 DMZ 对象，比如 ø = Object.create(null)，以保护全局对象</p>
+<p>ES6 中的箭头函数并不会使用四条标准的绑定规则，而是根据当前的词法作用域来决定 this，具体来说，箭头函数会继承外层函数调用的 this 绑定（无论 this 绑定到什么），这其实和 ES6 之前代码中的 self = this 机制一样</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Ivy Lei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-01-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/javascript/">JavaScript</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/js-symbol-simple/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Symbol 简介</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ivy Lei</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
