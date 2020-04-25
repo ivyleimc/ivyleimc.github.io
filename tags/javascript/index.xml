@@ -1,41 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JavaScript on Even - A super concise theme for Hugo</title>
+    <title>JavaScript on IvyLei - blog</title>
     <link>http://localhost:1313/tags/javascript/</link>
-    <description>Recent content in JavaScript on Even - A super concise theme for Hugo</description>
+    <description>Recent content in JavaScript on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 01 Feb 2020 15:51:50 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2020 06:36:46 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>let 简介</title>
-      <link>http://localhost:1313/post/js-let-simple/</link>
-      <pubDate>Sat, 01 Feb 2020 15:51:50 +0800</pubDate>
+      <title>Prototype</title>
+      <link>http://localhost:1313/post/js_prototype/</link>
+      <pubDate>Tue, 21 Apr 2020 06:36:46 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/js-let-simple/</guid>
-      <description>let 简介 All code test in Safari Version 12.1.1（14607.2.6.1.1） 1. 声明变量 ES6 新增了 let 命令，用来声明变量，用法类似于 var，但是所声明的变量，只在</description>
-    </item>
-    
-    <item>
-      <title>Symbol 简介1</title>
-      <link>http://localhost:1313/post/js-symbol-simple/</link>
-      <pubDate>Fri, 31 Jan 2020 20:36:44 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/js-symbol-simple/</guid>
-      <description>Symbol All code test in Safari Version 12.1.1（14607.2.6.1.1） 1. 新增的基本类型 JavaScript 有七种内置类型: 空值(null) 未定义(undefined) 布尔值</description>
-    </item>
-    
-    <item>
-      <title>this</title>
-      <link>http://localhost:1313/post/js-this/</link>
-      <pubDate>Mon, 27 Jan 2020 16:49:39 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/js-this/</guid>
-      <description>This All code test in Chrome Version 76.0.3809.132 (Official Build) (32-bit) 1. this 是什么 this 实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用 this 既不指向函数自身也不指向函数的词法</description>
+      <guid>http://localhost:1313/post/js_prototype/</guid>
+      <description>1. 原型链 所有对象都有 [[Prototype]] 内置属性，它指向另一个对象，另一个对象也有，一直到 Object.prototype 为至，这便是原型链 1.1 instanceof 所有函数都有 prototype 属性，用 new 函数调用得到一个对象</description>
     </item>
     
   </channel>

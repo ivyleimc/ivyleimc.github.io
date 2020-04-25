@@ -10,70 +10,49 @@
   
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2020-02-01T15:51:50+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/es6/</loc>
-    <lastmod>2020-02-01T15:51:50+08:00</lastmod>
+    <lastmod>2020-04-21T06:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2020-02-01T15:51:50+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/categories/javascript/</loc>
-    <lastmod>2020-02-01T15:51:50+08:00</lastmod>
+    <lastmod>2020-04-21T06:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/javascript/</loc>
-    <lastmod>2020-02-01T15:51:50+08:00</lastmod>
+    <lastmod>2020-04-21T06:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/js-let-simple/</loc>
-    <lastmod>2020-02-01T15:51:50+08:00</lastmod>
+    <loc>http://localhost:1313/categories/javascript/</loc>
+    <lastmod>2020-04-21T06:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-02-01T15:51:50+08:00</lastmod>
+    <lastmod>2020-04-21T06:36:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/js_prototype/</loc>
+    <lastmod>2020-04-21T06:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2020-02-01T15:51:50+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/post/js-symbol-simple/</loc>
-    <lastmod>2020-01-31T20:36:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/post/js-this/</loc>
-    <lastmod>2020-01-27T16:49:39+08:00</lastmod>
+    <lastmod>2020-04-21T06:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
