@@ -6,7 +6,7 @@
     <description>Recent content on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 10 Jun 2020 21:48:58 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2020 21:25:21 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Node</title>
+      <link>http://localhost:1313/post/js_node/</link>
+      <pubDate>Tue, 11 Aug 2020 21:25:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js_node/</guid>
+      <description>1. exports VS module.exports 模块成员导出的两种方法: exports.xxx = xxx; module.exports.xxx = xxx; exports 和 module.exports 均指向同一内存空间 exports&amp;mdash;&amp;gt; 某内存空间 &amp;lt;&amp;mdash;module.exports 但是 But 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&amp;hellip;}; 这时他们俩兄弟</description>
     </item>
     
     <item>

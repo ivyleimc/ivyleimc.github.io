@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node on IvyLei - blog</title>
+    <link>http://localhost:1313/tags/node/</link>
+    <description>Recent content in Node on IvyLei - blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 11 Aug 2020 21:25:21 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Node</title>
+      <link>http://localhost:1313/post/js_node/</link>
+      <pubDate>Tue, 11 Aug 2020 21:25:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js_node/</guid>
+      <description>1. exports VS module.exports 模块成员导出的两种方法: exports.xxx = xxx; module.exports.xxx = xxx; exports 和 module.exports 均指向同一内存空间 exports&amp;mdash;&amp;gt; 某内存空间 &amp;lt;&amp;mdash;module.exports 但是 But 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&amp;hellip;}; 这时他们俩兄弟</description>
+    </item>
+    
+  </channel>
+</rss>
