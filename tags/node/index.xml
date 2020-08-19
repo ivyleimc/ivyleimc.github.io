@@ -17,7 +17,7 @@
       <pubDate>Tue, 11 Aug 2020 21:25:21 +0800</pubDate>
       
       <guid>http://localhost:1313/post/js_node/</guid>
-      <description>1. exports VS module.exports 模块成员导出的两种方法: exports.xxx = xxx; module.exports.xxx = xxx; exports 和 module.exports 均指向同一内存空间 exports&amp;mdash;&amp;gt; 某内存空间 &amp;lt;&amp;mdash;module.exports 但是 But 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&amp;hellip;}; 这时他们俩兄弟</description>
+      <description>1. exports VS module.exports 模块成员导出的三种方法: exports.xxx = xxx; module.exports.xxx = xxx; module.exports = {&amp;hellip;} // exports 不能这样哦 exports 和 module.exports 指向同一内存空间 exports = module.exports = {&amp;hellip;} 但是 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&amp;hellip;}; 这</description>
     </item>
     
   </channel>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Node - IvyLei - blog</title>
+  <title>CSS - IvyLei - blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Ivy Lei" /><meta name="description" content="1. exports VS module.exports 模块成员导出的三种方法: exports.xxx = xxx; module.exports.xxx = xxx; module.exports = {&amp;hellip;} // exports 不能这样哦 exports 和 module.exports 指向同一内存空间 exports = module.exports = {&amp;hellip;} 但是 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&amp;hellip;}; 这" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Ivy Lei" /><meta name="description" content="盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width &#43; padding &#43; border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12 13 14" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.63.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/js_node/" />
+<link rel="canonical" href="http://localhost:1313/post/css/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,23 +38,23 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Node" />
-<meta property="og:description" content="1. exports VS module.exports 模块成员导出的三种方法: exports.xxx = xxx; module.exports.xxx = xxx; module.exports = {&hellip;} // exports 不能这样哦 exports 和 module.exports 指向同一内存空间 exports = module.exports = {&hellip;} 但是 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&hellip;}; 这" />
+<meta property="og:title" content="CSS" />
+<meta property="og:description" content="盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width &#43; padding &#43; border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12 13 14" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/js_node/" />
-<meta property="article:published_time" content="2020-08-11T21:25:21+08:00" />
-<meta property="article:modified_time" content="2020-08-11T21:25:21+08:00" />
-<meta itemprop="name" content="Node">
-<meta itemprop="description" content="1. exports VS module.exports 模块成员导出的三种方法: exports.xxx = xxx; module.exports.xxx = xxx; module.exports = {&hellip;} // exports 不能这样哦 exports 和 module.exports 指向同一内存空间 exports = module.exports = {&hellip;} 但是 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&hellip;}; 这">
-<meta itemprop="datePublished" content="2020-08-11T21:25:21&#43;08:00" />
-<meta itemprop="dateModified" content="2020-08-11T21:25:21&#43;08:00" />
-<meta itemprop="wordCount" content="120">
+<meta property="og:url" content="http://localhost:1313/post/css/" />
+<meta property="article:published_time" content="2020-08-19T21:10:30+08:00" />
+<meta property="article:modified_time" content="2020-08-19T21:10:30+08:00" />
+<meta itemprop="name" content="CSS">
+<meta itemprop="description" content="盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width &#43; padding &#43; border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12 13 14">
+<meta itemprop="datePublished" content="2020-08-19T21:10:30&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-19T21:10:30&#43;08:00" />
+<meta itemprop="wordCount" content="130">
 
 
 
-<meta itemprop="keywords" content="Node," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Node"/>
-<meta name="twitter:description" content="1. exports VS module.exports 模块成员导出的三种方法: exports.xxx = xxx; module.exports.xxx = xxx; module.exports = {&hellip;} // exports 不能这样哦 exports 和 module.exports 指向同一内存空间 exports = module.exports = {&hellip;} 但是 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&hellip;}; 这"/>
+<meta itemprop="keywords" content="CSS," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSS"/>
+<meta name="twitter:description" content="盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width &#43; padding &#43; border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12 13 14"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -121,12 +121,12 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Node</h1>
+      <h1 class="post-title">CSS</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-08-11 </span>
+        <span class="post-time"> 2020-08-19 </span>
         <div class="post-category">
-            <a href="/categories/node/"> Node </a>
+            <a href="/categories/css/"> CSS </a>
             </div>
         
       </div>
@@ -137,34 +137,74 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#1-exports-vs-moduleexports">1. exports VS module.exports</a></li>
+    <li><a href="#盒子模型">盒子模型</a></li>
+    <li><a href="#margin">margin</a></li>
+    <li><a href="#bfc">BFC</a></li>
+    <li><a href="#float">float</a></li>
+    <li><a href="#flex">flex</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="1-exports-vs-moduleexports">1. exports VS module.exports</h2>
+      <h2 id="盒子模型">盒子模型</h2>
 <blockquote>
-<p>模块成员导出的三种方法:</p>
-<ul>
-<li>exports.xxx = xxx;</li>
-<li>module.exports.xxx = xxx;</li>
-<li>module.exports = {&hellip;} // exports 不能这样哦</li>
-</ul>
+<p><strong>一般情况</strong>
+（没设 box-sizing 或者 box-sizing:content-box）</p>
+<p>元素宽度 = width + padding + border</p>
 </blockquote>
 <blockquote>
-<p>exports 和 module.exports 指向同一内存空间</p>
-<p>exports = module.exports = {&hellip;}</p>
+<p><strong>设 box-sizing: border-box</strong></p>
+<p>元素宽度 = width</p>
 </blockquote>
-<p>但是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="sb">`</span><span class="sb">
+</span><span class="sb">    &lt;style&gt;
+</span><span class="sb">        div#d1 {
+</span><span class="sb">            width: 50px;
+</span><span class="sb">            height: 50px;
+</span><span class="sb">            padding: 2px;
+</span><span class="sb">            margin: 4px;
+</span><span class="sb">            border: 1px solid salmon;
+</span><span class="sb">        }
+</span><span class="sb">    &lt;/style&gt;
+</span><span class="sb">    &lt;div id=&#34;d1&#34;&gt;&lt;/div&gt;
+</span><span class="sb"></span><span class="sb">`</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// 问 div#d1 的 offsetWidth?
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;d1&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">offsetWidth</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// 想让 div#d1 的 offsetWidth 就是设的 width,
+</span><span class="c1"></span><span class="c1">// 加上 box-sizing: border-box
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="margin">margin</h2>
 <blockquote>
-<p>🍳 最终会以 module.exports 为准</p>
-<p>若某天有人写了句 module.exports = {&hellip;};</p>
-<p>这时他们俩兄弟的指向就不同了</p>
-<p>但最终又是以 module.exports 为准的</p>
-<p>那通过 exports.xxx = xxx; 方式导出的不就失效（呵呵）了</p>
+<p><strong>纵向重叠</strong></p>
+<p><strong>取负值</strong></p>
 </blockquote>
-<p>所以要小心哦 ～</p>
+<h2 id="bfc">BFC</h2>
+<h2 id="float">float</h2>
+<h2 id="flex">flex</h2>
 
     </div>
 
@@ -176,7 +216,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2020-08-11
+        2020-08-19
         
     </span>
   </p>
@@ -185,16 +225,12 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/node/">Node</a>
+          <a href="/tags/css/">CSS</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/html/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">HTML</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/issue_this_arrowfunctionexpression/">
-            <span class="next-text nav-default">[Issue] this 箭头函数</span>
+        
+        <a class="next" href="/post/html/">
+            <span class="next-text nav-default">HTML</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

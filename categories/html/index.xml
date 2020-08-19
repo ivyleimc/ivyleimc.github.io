@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTML on IvyLei - blog</title>
+    <link>http://localhost:1313/categories/html/</link>
+    <description>Recent content in HTML on IvyLei - blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 19 Aug 2020 20:51:07 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/html/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HTML</title>
+      <link>http://localhost:1313/post/html/</link>
+      <pubDate>Wed, 19 Aug 2020 20:51:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/html/</guid>
+      <description>HTML 语义化 好处 让人更容易阅读 （有利于开发和维护） 让机器也更容易阅读 （SEO，爬虫，还有阅读器） 块级元素 &amp;amp; 内连元素 display: block/table div, h1~h6, table, ul,p,. .. display: inline/inline-block span, a, img, button, input,&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

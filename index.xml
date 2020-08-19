@@ -6,7 +6,7 @@
     <description>Recent content on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 11 Aug 2020 21:25:21 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2020 21:10:30 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,12 +23,30 @@ It makes use of a variety of open source projects including:
     </item>
     
     <item>
+      <title>CSS</title>
+      <link>http://localhost:1313/post/css/</link>
+      <pubDate>Wed, 19 Aug 2020 21:10:30 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/css/</guid>
+      <description>盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width + padding + border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12 13 14</description>
+    </item>
+    
+    <item>
+      <title>HTML</title>
+      <link>http://localhost:1313/post/html/</link>
+      <pubDate>Wed, 19 Aug 2020 20:51:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/html/</guid>
+      <description>HTML 语义化 好处 让人更容易阅读 （有利于开发和维护） 让机器也更容易阅读 （SEO，爬虫，还有阅读器） 块级元素 &amp;amp; 内连元素 display: block/table div, h1~h6, table, ul,p,. .. display: inline/inline-block span, a, img, button, input,&amp;hellip;</description>
+    </item>
+    
+    <item>
       <title>Node</title>
       <link>http://localhost:1313/post/js_node/</link>
       <pubDate>Tue, 11 Aug 2020 21:25:21 +0800</pubDate>
       
       <guid>http://localhost:1313/post/js_node/</guid>
-      <description>1. exports VS module.exports 模块成员导出的两种方法: exports.xxx = xxx; module.exports.xxx = xxx; exports 和 module.exports 均指向同一内存空间 exports&amp;mdash;&amp;gt; 某内存空间 &amp;lt;&amp;mdash;module.exports 但是 But 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&amp;hellip;}; 这时他们俩兄弟</description>
+      <description>1. exports VS module.exports 模块成员导出的三种方法: exports.xxx = xxx; module.exports.xxx = xxx; module.exports = {&amp;hellip;} // exports 不能这样哦 exports 和 module.exports 指向同一内存空间 exports = module.exports = {&amp;hellip;} 但是 🍳 最终会以 module.exports 为准 若某天有人写了句 module.exports = {&amp;hellip;}; 这</description>
     </item>
     
     <item>
