@@ -48,7 +48,7 @@
 <meta itemprop="description" content="盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width &#43; padding &#43; border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12 13 14">
 <meta itemprop="datePublished" content="2020-08-19T21:10:30&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-19T21:10:30&#43;08:00" />
-<meta itemprop="wordCount" content="130">
+<meta itemprop="wordCount" content="427">
 
 
 
@@ -138,7 +138,12 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#盒子模型">盒子模型</a></li>
-    <li><a href="#margin">margin</a></li>
+    <li><a href="#margin">margin</a>
+      <ul>
+        <li><a href="#纵向重叠">纵向重叠</a></li>
+        <li><a href="#取负值">取负值</a></li>
+      </ul>
+    </li>
     <li><a href="#bfc">BFC</a></li>
     <li><a href="#float">float</a></li>
     <li><a href="#flex">flex</a></li>
@@ -193,16 +198,165 @@
 <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
 <span class="c1">// 问 div#d1 的 offsetWidth?
 </span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;d1&#39;</span><span class="p">)</span><span class="p">.</span><span class="nx">offsetWidth</span><span class="p">)</span><span class="p">;</span>
-<span class="c1">// 想让 div#d1 的 offsetWidth 就是设的 width,
+<span class="c1">// 想让 div#d1 的 offsetWidth 就是设的 width，怎么办？
 </span><span class="c1"></span><span class="c1">// 加上 box-sizing: border-box
 </span></code></pre></td></tr></table>
 </div>
 </div><h2 id="margin">margin</h2>
 <blockquote>
-<p><strong>纵向重叠</strong></p>
-<p><strong>取负值</strong></p>
+<h3 id="纵向重叠">纵向重叠</h3>
+<p>相邻元素的 margin-top 和 margin-bottom 会发生重叠，取较大值</p>
 </blockquote>
-<h2 id="bfc">BFC</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="sb">`</span><span class="sb">
+</span><span class="sb">    &lt;style&gt;
+</span><span class="sb">        body {
+</span><span class="sb">            margin: 0;
+</span><span class="sb">            padding: 0;
+</span><span class="sb">        }
+</span><span class="sb">        p {
+</span><span class="sb">            font-size: 18px;
+</span><span class="sb">            line-height: 1;
+</span><span class="sb">            margin-top: 15px;
+</span><span class="sb">            margin-bottom: 10px;
+</span><span class="sb">        }
+</span><span class="sb">    &lt;/style&gt;
+</span><span class="sb">    &lt;p id=&#39;p1&#39;&gt;p1&lt;/p&gt;
+</span><span class="sb">    &lt;p&gt;&lt;/p&gt;
+</span><span class="sb">    &lt;p&gt;&lt;/p&gt;
+</span><span class="sb">    &lt;p id=&#39;p4&#39;&gt;p4&lt;/p&gt;
+</span><span class="sb">    &lt;p id=&#39;p5&#39;&gt;p5&lt;/p&gt;
+</span><span class="sb"></span><span class="sb">`</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">p1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">p4</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;p4&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">p5</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;p5&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//p1 与 p4 的距离？
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p4</span><span class="p">.</span><span class="nx">offsetTop</span> <span class="o">-</span> <span class="p">(</span><span class="nx">p1</span><span class="p">.</span><span class="nx">offsetTop</span><span class="o">+</span><span class="nx">p1</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//p4 与 p5 的距离？
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p5</span><span class="p">.</span><span class="nx">offsetTop</span> <span class="o">-</span> <span class="p">(</span><span class="nx">p4</span><span class="p">.</span><span class="nx">offsetTop</span><span class="o">+</span><span class="nx">p4</span><span class="p">.</span><span class="nx">offsetHeight</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//如果 p 上的样式加上 overflow：hidden，又会怎么样呢？
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="取负值">取负值</h3>
+<ul>
+<li>margin-top 负值：向上移</li>
+<li>margin-left 负值：向左移</li>
+<li>margin-right 负值：自己不动，右边元素左移</li>
+<li>margin-bottom 负值： 自己不动，下边元素上移</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="sb">`</span><span class="sb">
+</span><span class="sb">    &lt;style&gt;
+</span><span class="sb">        .d1 {
+</span><span class="sb">            width: 120px;
+</span><span class="sb">            height: 120px;
+</span><span class="sb">            margin: 20px;
+</span><span class="sb">            border: 1px solid lightsalmon;
+</span><span class="sb">        }
+</span><span class="sb">        .floatleft {
+</span><span class="sb">            float: left;
+</span><span class="sb">        }
+</span><span class="sb">        .d, .dd {
+</span><span class="sb">            width: 50px;
+</span><span class="sb">            height: 50px;
+</span><span class="sb">            opacity: 0.6;
+</span><span class="sb">            margin-right: -10px;
+</span><span class="sb">        }
+</span><span class="sb">        .d {
+</span><span class="sb">            background: lightgreen;
+</span><span class="sb">        }
+</span><span class="sb">        .dd {
+</span><span class="sb">            background: lightblue;
+</span><span class="sb">        }
+</span><span class="sb">    &lt;/style&gt;
+</span><span class="sb">    &lt;div class=&#39;d1&#39;&gt;
+</span><span class="sb">        &lt;div class=&#39;d&#39;&gt;&lt;/div&gt;
+</span><span class="sb">        &lt;div class=&#39;dd&#39;&gt;&lt;/div&gt;
+</span><span class="sb">
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb">    &lt;div class=&#39;d1&#39;&gt;
+</span><span class="sb">        &lt;div class=&#39;d floatleft&#39;&gt;&lt;/div&gt;
+</span><span class="sb">        &lt;div class=&#39;dd floatleft&#39;&gt;&lt;/div&gt;
+</span><span class="sb">
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb"></span><span class="sb">`</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="bfc">BFC</h2>
 <h2 id="float">float</h2>
 <h2 id="flex">flex</h2>
 
