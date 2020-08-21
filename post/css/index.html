@@ -48,7 +48,7 @@
 <meta itemprop="description" content="盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width &#43; padding &#43; border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12 13 14">
 <meta itemprop="datePublished" content="2020-08-19T21:10:30&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-19T21:10:30&#43;08:00" />
-<meta itemprop="wordCount" content="427">
+<meta itemprop="wordCount" content="774">
 
 
 
@@ -144,8 +144,19 @@
         <li><a href="#取负值">取负值</a></li>
       </ul>
     </li>
-    <li><a href="#bfc">BFC</a></li>
-    <li><a href="#float">float</a></li>
+    <li><a href="#bfc">BFC</a>
+      <ul>
+        <li><a href="#创建-bfc-常见的条件">创建 BFC 常见的条件</a></li>
+        <li><a href="#bfc-的常见作用">BFC 的常见作用</a></li>
+      </ul>
+    </li>
+    <li><a href="#float">float</a>
+      <ul>
+        <li><a href="#圣杯布局">圣杯布局</a></li>
+        <li><a href="#双飞翼布局">双飞翼布局</a></li>
+        <li><a href="#手写-clearfix">手写 clearfix</a></li>
+      </ul>
+    </li>
     <li><a href="#flex">flex</a></li>
   </ul>
 </nav>
@@ -357,8 +368,218 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="bfc">BFC</h2>
+<blockquote>
+<p>(Block Formatting Context) 块格式化上下文</p>
+<p>块格式化上下文包含创建它的元素内部的所有内容</p>
+</blockquote>
+<blockquote>
+<h3 id="创建-bfc-常见的条件">创建 BFC 常见的条件</h3>
+<ul>
+<li>float 不是 none</li>
+<li>position 是 absolute 或 fixed</li>
+<li>overflow 不是 visible</li>
+<li>display 是 flex， inline-block，。。。</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="bfc-的常见作用">BFC 的常见作用</h3>
+<ul>
+<li>清除浮动 （clear:both 也行）</li>
+</ul>
+</blockquote>
 <h2 id="float">float</h2>
-<h2 id="flex">flex</h2>
+<blockquote>
+<h3 id="圣杯布局">圣杯布局</h3>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="sb">`</span><span class="sb">
+</span><span class="sb">    &lt;style&gt;
+</span><span class="sb">        body {
+</span><span class="sb">            margin: 0;
+</span><span class="sb">            padding: 0;
+</span><span class="sb">        }
+</span><span class="sb">        header, footer {
+</span><span class="sb">            width: 100%;
+</span><span class="sb">            background: #eee;
+</span><span class="sb">        }
+</span><span class="sb">        #container {
+</span><span class="sb">            padding: 0 120px 0 200px;
+</span><span class="sb">            overflow: hidden;
+</span><span class="sb">        }
+</span><span class="sb">        .col {
+</span><span class="sb">            float: left;
+</span><span class="sb">        }
+</span><span class="sb">        #cen {
+</span><span class="sb">            width: 100%;
+</span><span class="sb">            background: lightyellow;
+</span><span class="sb">        }
+</span><span class="sb">        #lef {
+</span><span class="sb">            width: 200px;
+</span><span class="sb">            background: lightsalmon;
+</span><span class="sb">            margin-left: -100%;
+</span><span class="sb">            position: relative;
+</span><span class="sb">            left: -200px;
+</span><span class="sb">        }
+</span><span class="sb">        #rig {
+</span><span class="sb">            width: 120px;
+</span><span class="sb">            background: lightblue;
+</span><span class="sb">            margin-right: -120px;
+</span><span class="sb">        }
+</span><span class="sb">    &lt;/style&gt;
+</span><span class="sb">    &lt;header&gt;header&lt;/header&gt;
+</span><span class="sb">    &lt;div id=&#39;container&#39;&gt;
+</span><span class="sb">        &lt;div id=&#39;cen&#39; class=&#39;col&#39;&gt;center&lt;/div&gt;
+</span><span class="sb">        &lt;div id=&#39;lef&#39; class=&#39;col&#39;&gt;left&lt;/div&gt;
+</span><span class="sb">        &lt;div id=&#39;rig&#39; class=&#39;col&#39;&gt;right&lt;/div&gt;
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb">    &lt;footer&gt;footer&lt;/footer&gt;
+</span><span class="sb"></span><span class="sb">`</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="双飞翼布局">双飞翼布局</h3>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="sb">`</span><span class="sb">
+</span><span class="sb">    &lt;style&gt;
+</span><span class="sb">        body {
+</span><span class="sb">            margin: 0;
+</span><span class="sb">            padding: 0;
+</span><span class="sb">        }
+</span><span class="sb">        #main {
+</span><span class="sb">            width: 100%;
+</span><span class="sb">            background: #eee;
+</span><span class="sb">        }
+</span><span class="sb">        .col {
+</span><span class="sb">            float: left;
+</span><span class="sb">        }
+</span><span class="sb">        #main-wrap {
+</span><span class="sb">            margin: 0 120px 0 200px;
+</span><span class="sb">        }
+</span><span class="sb">        #left {
+</span><span class="sb">            width: 200px;
+</span><span class="sb">            background: lightsalmon;
+</span><span class="sb">            margin-left: -100%;
+</span><span class="sb">        }
+</span><span class="sb">        #right {
+</span><span class="sb">            width: 120px;
+</span><span class="sb">            background: lightblue;
+</span><span class="sb">            margin-left: -120px;
+</span><span class="sb">        }
+</span><span class="sb">    &lt;/style&gt;
+</span><span class="sb">    &lt;div id=&#39;main&#39; class=&#39;col&#39;&gt;
+</span><span class="sb">        &lt;div id=&#39;main-wrap&#39;&gt;main-wrap&lt;/div&gt;
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb">    &lt;div id=&#39;left&#39; class=&#39;col&#39;&gt;left&lt;/div&gt;
+</span><span class="sb">    &lt;div id=&#39;right&#39; class=&#39;col&#39;&gt;right&lt;/div&gt;
+</span><span class="sb"></span><span class="sb">`</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="手写-clearfix">手写 clearfix</h3>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">.</span><span class="nx">clearfix</span><span class="o">:</span><span class="nx">after</span> <span class="p">{</span>
+    <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="nx">display</span><span class="o">:</span> <span class="nx">block</span><span class="p">;</span>
+    <span class="nx">clear</span><span class="o">:</span> <span class="nx">both</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="flex">flex</h2>
 
     </div>
 
