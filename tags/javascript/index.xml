@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JavaScript on IvyLei - blog</title>
+    <title>Javascript on IvyLei - blog</title>
     <link>http://localhost:1313/tags/javascript/</link>
-    <description>Recent content in JavaScript on IvyLei - blog</description>
+    <description>Recent content in Javascript on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 10 Jun 2020 21:48:58 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 17:23:17 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JS</title>
+      <link>http://localhost:1313/post/js/</link>
+      <pubDate>Sun, 23 Aug 2020 17:23:17 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js/</guid>
+      <description>变量类型和计算 值类型和引用类型 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 引用类型 1 2 3 4 5 let object111 = {num: 20}; let</description>
+    </item>
     
     <item>
       <title>[Issue] this 箭头函数</title>

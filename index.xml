@@ -6,7 +6,7 @@
     <description>Recent content on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 19 Aug 2020 21:10:30 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 17:23:17 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,12 +23,21 @@ It makes use of a variety of open source projects including:
     </item>
     
     <item>
+      <title>JS</title>
+      <link>http://localhost:1313/post/js/</link>
+      <pubDate>Sun, 23 Aug 2020 17:23:17 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js/</guid>
+      <description>变量类型和计算 值类型和引用类型 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 引用类型 1 2 3 4 5 let object111 = {num: 20}; let</description>
+    </item>
+    
+    <item>
       <title>CSS</title>
       <link>http://localhost:1313/post/css/</link>
       <pubDate>Wed, 19 Aug 2020 21:10:30 +0800</pubDate>
       
       <guid>http://localhost:1313/post/css/</guid>
-      <description>盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width + padding + border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12 13 14</description>
+      <description>布局 盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度 = width + padding + border 设 box-sizing: border-box 元素宽度 = width 1 2 3 4 5 6 7 8 9 10 11 12</description>
     </item>
     
     <item>
