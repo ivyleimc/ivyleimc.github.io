@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Javascript on IvyLei - blog</title>
+    <title>JavaScript on IvyLei - blog</title>
     <link>http://localhost:1313/categories/javascript/</link>
-    <description>Recent content in Javascript on IvyLei - blog</description>
+    <description>Recent content in JavaScript on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 23 Aug 2020 17:23:17 +0800</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Sun, 23 Aug 2020 17:23:17 +0800</pubDate>
       
       <guid>http://localhost:1313/post/js/</guid>
-      <description>变量类型和计算 值类型和引用类型 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 引用类型 1 2 3 4 5 let object111 = {num: 20}; let</description>
+      <description>变量类型 值类型和引用类型 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 引用类型 1 2 3 4 5 let object111 = {num: 20}; let object222 = aaaa;</description>
     </item>
     
     <item>
