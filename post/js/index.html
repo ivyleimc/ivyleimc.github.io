@@ -48,7 +48,7 @@
 <meta itemprop="description" content="变量类型 值类型和引用类型 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 引用类型 1 2 3 4 5 let object111 = {num: 20}; let object222 = aaaa;">
 <meta itemprop="datePublished" content="2020-08-23T17:23:17&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-23T17:23:17&#43;08:00" />
-<meta itemprop="wordCount" content="798">
+<meta itemprop="wordCount" content="970">
 
 
 
@@ -154,10 +154,10 @@
     </li>
     <li><a href="#原型和原型链">原型和原型链</a>
       <ul>
+        <li><a href="#原型链">原型链</a></li>
         <li><a href="#class">class</a></li>
         <li><a href="#继承">继承</a></li>
         <li><a href="#原型">原型</a></li>
-        <li><a href="#原型链">原型链</a></li>
         <li><a href="#instanceof">instanceof</a></li>
       </ul>
     </li>
@@ -591,10 +591,56 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="原型和原型链">原型和原型链</h2>
+<h3 id="原型链">原型链</h3>
+<p>首先清楚三个点</p>
+<blockquote>
+<ul>
+<li>所有对象都有 [[Prototype]] 内置属性</li>
+<li>所有函数都有 prototype 内置属性</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>通过 new 函数调用法调用函数创建新对象，新对象的 [[Prototype]] 会指向被调用函数的 prototype</li>
+<li>通过 Object.create(fn) 创建新对象，新对象的 [[Prototype]] 会指向被 fn</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>原型链的尽头是 Object.prototype</li>
+</ul>
+</blockquote>
+<p>🌰，栗子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">afn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">fn</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">afn</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj1</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">obj</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>简而言之，沿着 [[Prototype]] 一路往上找直到 Object.prototype，的这条东西就叫原型链</strong></p>
+</blockquote>
 <h3 id="class">class</h3>
 <h3 id="继承">继承</h3>
 <h3 id="原型">原型</h3>
-<h3 id="原型链">原型链</h3>
 <h3 id="instanceof">instanceof</h3>
 <h2 id="作用域和闭包">作用域和闭包</h2>
 <h3 id="作用域">作用域</h3>
