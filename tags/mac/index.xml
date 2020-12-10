@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mac on IvyLei - blog</title>
+    <link>http://localhost:1313/tags/mac/</link>
+    <description>Recent content in Mac on IvyLei - blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 10 Dec 2020 20:47:31 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/mac/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac</title>
+      <link>http://localhost:1313/post/mac/</link>
+      <pubDate>Thu, 10 Dec 2020 20:47:31 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/mac/</guid>
+      <description>VS Code 折叠代码： command+k+0 展开代码： command+k+j</description>
+    </item>
+    
+  </channel>
+</rss>
