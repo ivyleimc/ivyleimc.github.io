@@ -6,7 +6,7 @@
     <description>Recent content on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Dec 2020 21:41:42 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 20 Dec 2020 13:14:57 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>React_question</title>
+      <link>http://localhost:1313/post/react_question/</link>
+      <pubDate>Sun, 20 Dec 2020 13:14:57 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/react_question/</guid>
+      <description>为什么要写 super(props) super()，执行父类构造函数，初始化 this super(props), 传 props 进去是为了初始化 this.props 1 2 //初始化 this.props, React 内相当于 this.props = props; 不传 props 的话，React 也会在实</description>
     </item>
     
     <item>
@@ -46,7 +55,7 @@ It makes use of a variety of open source projects including:
       <pubDate>Thu, 10 Dec 2020 20:47:31 +0800</pubDate>
       
       <guid>http://localhost:1313/post/mac/</guid>
-      <description>VS Code 折叠代码： command+k+0 展开代码： command+k+j</description>
+      <description>VS Code 折叠代码： command+k+0 展开代码： command+k+j 批量注释： ⬆️+option+a 格式化： ⬆️+option+f</description>
     </item>
     
     <item>

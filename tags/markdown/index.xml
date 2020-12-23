@@ -6,19 +6,10 @@
     <description>Recent content in Markdown on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 10 Dec 2020 21:41:42 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 10 Dec 2020 20:53:40 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>React_hook</title>
-      <link>http://localhost:1313/post/react_hook/</link>
-      <pubDate>Thu, 10 Dec 2020 21:41:42 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/react_hook/</guid>
-      <description>为什么有 Hook？ 回顾 Class 组件，函数组件 Class 组件 有生命周期，有实例，有 state，setState，一旦大了就复杂难拆分 相同业务逻辑，分散到各个</description>
-    </item>
     
     <item>
       <title>Markdown</title>
