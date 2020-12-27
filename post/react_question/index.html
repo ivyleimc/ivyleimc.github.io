@@ -48,7 +48,7 @@
 <meta itemprop="description" content="为什么要写 super(props) super()，执行父类构造函数，初始化 this super(props), 传 props 进去是为了初始化 this.props 1 2 //初始化 this.props, React 内相当于 this.props = props; 不传 props 的话，React 也会在实">
 <meta itemprop="datePublished" content="2020-12-20T13:14:57&#43;08:00" />
 <meta itemprop="dateModified" content="2020-12-20T13:14:57&#43;08:00" />
-<meta itemprop="wordCount" content="584">
+<meta itemprop="wordCount" content="1232">
 
 
 
@@ -140,6 +140,7 @@
     <li><a href="#为什么要写-superprops">为什么要写 super(props)</a></li>
     <li><a href="#react-如何区分-class-和-function">React 如何区分 Class 和 Function</a></li>
     <li><a href="#react-元素的-typeof-属性有什么用">React 元素的 $$typeof 属性有什么用</a></li>
+    <li><a href="#setstate-如何知道要做什么">setState 如何知道要做什么</a></li>
   </ul>
 </nav>
   </div>
@@ -288,6 +289,141 @@
 json 不支持 Symbol 类型，返回的 json 不会含有 Symbol.for(&lsquo;react.element&rsquo;)<br>
 React 会检测 element.$$typeof，如果丢失或者无效，会拒绝处理该元素</p>
 </blockquote>
+<blockquote>
+<h2 id="setstate-如何知道要做什么">setState 如何知道要做什么</h2>
+<ul>
+<li><strong>当我们调用 setState 时，会更新 state 从而更新 DOM</strong>
+<ul>
+<li>更新 DOM 不应该是 react-dom 的事情吗，怎么在 react.component 的方法里做了呢</li>
+<li>在 react native app 的组件也是继承自 react.component 的，它们也能调用 setState 方法，但渲染的是安卓或 IOS 的原生界面不是 DOM</li>
+</ul>
+</li>
+<li><strong>React 其实是这样的</strong>
+<ul>
+<li>React 包只导出 API，但具体的实现是在渲染器里（react-dom、react-dom/server、 react-native，。。。）实现的</li>
+<li>React 导出的 API 是独立于平台的，哪个平台都能用，但渲染器包暴露的方法是针对特定平台的
+<ul>
+<li>如：网站 用 react/react-dom， 安卓/IOS 用 react/react-native</li>
+</ul>
+</li>
+<li>渲染器会在实例化类后给属性 updater 设置一个值，不同的渲染器设置的就不同，然后 setState 时就调用这个 updater 属性上的方式，这样 setState 的具体实现就交到了渲染器手上了</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// React DOM 内部
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">inst</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YourComponent</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">inst</span><span class="p">.</span><span class="nx">props</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+<span class="nx">inst</span><span class="p">.</span><span class="nx">updater</span> <span class="o">=</span> <span class="nx">ReactDOMUpdater</span><span class="p">;</span>
+
+<span class="c1">// React DOM Server 内部
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">inst</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YourComponent</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">inst</span><span class="p">.</span><span class="nx">props</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+<span class="nx">inst</span><span class="p">.</span><span class="nx">updater</span> <span class="o">=</span> <span class="nx">ReactDOMServerUpdater</span><span class="p">;</span>
+
+<span class="c1">// React Native 内部
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">inst</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YourComponent</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">inst</span><span class="p">.</span><span class="nx">props</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+<span class="nx">inst</span><span class="p">.</span><span class="nx">updater</span> <span class="o">=</span> <span class="nx">ReactNativeUpdater</span><span class="p">;</span>  
+
+<span class="c1">// 适当简化的代码
+</span><span class="c1"></span><span class="nx">setState</span><span class="p">(</span><span class="nx">partialState</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 使用`updater`字段回应渲染器！
+</span><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">updater</span><span class="p">.</span><span class="nx">enqueueSetState</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">partialState</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>useState Hook也是做了同样的事情</strong>
+<ul>
+<li>Hooks 使用了一个 dispatcher 对象，代替了 updater 字段</li>
+<li>当调用 React.useState()、React.useEffect()、 或者其他内置的 Hook 时，这些调用被转发给了当前的 dispatcher</li>
+<li>各个渲染器会在渲染你的组件之前设置 dispatcher</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// React内部(适当简化)
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">React</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// 真实属性隐藏的比较深，看你能不能找到它！
+</span><span class="c1"></span>  <span class="nx">__currentDispatcher</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+
+  <span class="nx">useState</span><span class="p">(</span><span class="nx">initialState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">React</span><span class="p">.</span><span class="nx">__currentDispatcher</span><span class="p">.</span><span class="nx">useState</span><span class="p">(</span><span class="nx">initialState</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+
+  <span class="nx">useEffect</span><span class="p">(</span><span class="nx">initialState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">React</span><span class="p">.</span><span class="nx">__currentDispatcher</span><span class="p">.</span><span class="nx">useEffect</span><span class="p">(</span><span class="nx">initialState</span><span class="p">)</span><span class="p">;</span>
+  <span class="p">}</span><span class="p">,</span>
+  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span><span class="p">;</span>
+
+<span class="c1">// 各个渲染器会在渲染你的组件之前设置 dispatcher
+</span><span class="c1"></span><span class="c1">// React DOM 内部
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">prevDispatcher</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">__currentDispatcher</span><span class="p">;</span>
+<span class="nx">React</span><span class="p">.</span><span class="nx">__currentDispatcher</span> <span class="o">=</span> <span class="nx">ReactDOMDispatcher</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">result</span><span class="p">;</span>
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nx">result</span> <span class="o">=</span> <span class="nx">YourComponent</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+  <span class="c1">// 恢复原状
+</span><span class="c1"></span>  <span class="nx">React</span><span class="p">.</span><span class="nx">__currentDispatcher</span> <span class="o">=</span> <span class="nx">prevDispatcher</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
 
     </div>
 
