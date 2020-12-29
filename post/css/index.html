@@ -48,7 +48,7 @@
 <meta itemprop="description" content="布局 盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度（offsetWidth） = width &#43; padding * 2 &#43; border * 2（没有 m">
 <meta itemprop="datePublished" content="2020-08-19T21:10:30&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-19T21:10:30&#43;08:00" />
-<meta itemprop="wordCount" content="1674">
+<meta itemprop="wordCount" content="1835">
 
 
 
@@ -142,17 +142,20 @@
         <li><a href="#盒子模型">盒子模型</a></li>
         <li><a href="#margin-纵向重叠">margin 纵向重叠</a></li>
         <li><a href="#margin-取负值">margin 取负值</a></li>
-        <li><a href="#bfc">BFC</a></li>
+        <li><a href="#bfc-形成条件和应用">BFC 形成条件和应用</a></li>
         <li><a href="#圣杯布局--双飞翼布局">圣杯布局 & 双飞翼布局</a></li>
         <li><a href="#圣杯布局">圣杯布局</a></li>
         <li><a href="#双飞翼布局">双飞翼布局</a></li>
-        <li><a href="#flex">flex</a></li>
+        <li><a href="#手写清除浮动-clearfix">手写清除浮动 clearfix</a></li>
+        <li><a href="#flex-画三点骰子">flex 画三点骰子</a></li>
       </ul>
     </li>
     <li><a href="#定位">定位</a>
       <ul>
-        <li><a href="#display">display</a></li>
-        <li><a href="#居中对其">居中对其</a></li>
+        <li><a href="#relative">relative</a></li>
+        <li><a href="#absolutere">absolutere</a></li>
+        <li><a href="#居中对其---水平居中">居中对其 - 水平居中</a></li>
+        <li><a href="#居中对其---垂直居中">居中对其 - 垂直居中</a></li>
       </ul>
     </li>
     <li><a href="#图文样式">图文样式</a>
@@ -372,7 +375,7 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="bfc">BFC</h3>
+</div><h3 id="bfc-形成条件和应用">BFC 形成条件和应用</h3>
 <blockquote>
 <p>(Block Formatting Context) 块格式化上下文</p>
 <p>块格式化上下文包含创建它的元素内部的所有内容</p>
@@ -401,8 +404,79 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 <h3 id="圣杯布局">圣杯布局</h3>
 <blockquote>
 <p>一个大容器里面装三个小容器<br>
-大容器设左右 margin，定位中间容器</p>
+大容器设左右 padding，定位中间容器</p>
 </blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="sb">`</span><span class="sb">
+</span><span class="sb">    &lt;style&gt;
+</span><span class="sb">        body {
+</span><span class="sb">            margin: 0;
+</span><span class="sb">            padding: 0;
+</span><span class="sb">        }
+</span><span class="sb">        header, footer {
+</span><span class="sb">            width: 100%;
+</span><span class="sb">            background: #eee;
+</span><span class="sb">        }
+</span><span class="sb">        #cen {
+</span><span class="sb">            width: 100%;
+</span><span class="sb">            background: lightyellow;
+</span><span class="sb">        }
+</span><span class="sb">        #lef {
+</span><span class="sb">            width: 200px;
+</span><span class="sb">            background: lightsalmon;
+</span><span class="sb">        }
+</span><span class="sb">        #rig {
+</span><span class="sb">            width: 120px;
+</span><span class="sb">            background: lightblue;
+</span><span class="sb">        }
+</span><span class="sb">    &lt;/style&gt;
+</span><span class="sb">    &lt;header&gt;header&lt;/header&gt;
+</span><span class="sb">    &lt;div id=&#39;container&#39;&gt;
+</span><span class="sb">        &lt;div id=&#39;cen&#39; class=&#39;col&#39;&gt;center&lt;/div&gt;
+</span><span class="sb">        &lt;div id=&#39;lef&#39; class=&#39;col&#39;&gt;left&lt;/div&gt;
+</span><span class="sb">        &lt;div id=&#39;rig&#39; class=&#39;col&#39;&gt;right&lt;/div&gt;
+</span><span class="sb">    &lt;/div&gt;
+</span><span class="sb">    &lt;footer&gt;footer&lt;/footer&gt;
+</span><span class="sb"></span><span class="sb">`</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>答案：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -496,6 +570,10 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="双飞翼布局">双飞翼布局</h3>
+<blockquote>
+<p>三个容器，第一个里有一个容器做为中间内容<br>
+第一个容器里的容器设左右 margin，定位中间容器</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -570,9 +648,7 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><blockquote>
-<p><strong>手写 clearfix</strong></p>
-</blockquote>
+</div><h3 id="手写清除浮动-clearfix">手写清除浮动 clearfix</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -589,27 +665,27 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="flex">flex</h3>
+</div><h3 id="flex-画三点骰子">flex 画三点骰子</h3>
 <blockquote>
 <p><strong>容器的属性</strong></p>
 <ul>
-<li>flex-direction</li>
-<li>flex-wrap</li>
+<li><strong>flex-direction</strong></li>
+<li><strong>flex-wrap</strong></li>
+<li><strong>justify-content</strong></li>
+<li><strong>align-items</strong></li>
 <li>flex-flow</li>
-<li>justify-content</li>
-<li>align-items</li>
 <li>align-content</li>
 </ul>
 </blockquote>
 <blockquote>
 <p><strong>项目的属性</strong></p>
 <ul>
+<li><strong>align-self</strong></li>
 <li>order</li>
 <li>flex-grow</li>
 <li>flex-shrink</li>
 <li>flex-basis</li>
 <li>flex</li>
-<li>align-self</li>
 </ul>
 </blockquote>
 <p><strong>flex 应用：画 🎲</strong></p>
@@ -848,19 +924,17 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="定位">定位</h2>
-<h3 id="display">display</h3>
+<h3 id="relative">relative</h3>
 <blockquote>
-<p><strong>relative</strong></p>
 <p>依据自身定位</p>
 </blockquote>
+<h3 id="absolutere">absolutere</h3>
 <blockquote>
-<p><strong>absolutere</strong></p>
-<p>依据最近一层定位元素定位</p>
+<p>依据最近一层定位元素定位<br>
+定位元素：absoulute, relative, fixed 或者 body</p>
 </blockquote>
-<p>定位元素：absoulute; relative; fixed; body</p>
-<h3 id="居中对其">居中对其</h3>
+<h3 id="居中对其---水平居中">居中对其 - 水平居中</h3>
 <blockquote>
-<p><strong>水平居中</strong></p>
 <ul>
 <li>inline 元素：text-aling: center</li>
 <li>block 元素：margin: auto</li>
@@ -955,8 +1029,8 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><blockquote>
-<p><strong>垂直居中</strong></p>
+</div><h3 id="居中对其---垂直居中">居中对其 - 垂直居中</h3>
+<blockquote>
 <ul>
 <li>inline 元素：line-height 的值等于 height 值</li>
 <li>absolute 元素：top: 50%; margin-top: 负值</li>
