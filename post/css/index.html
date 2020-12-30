@@ -48,7 +48,7 @@
 <meta itemprop="description" content="布局 盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度（offsetWidth） = width &#43; padding * 2 &#43; border * 2（没有 m">
 <meta itemprop="datePublished" content="2020-08-19T21:10:30&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-19T21:10:30&#43;08:00" />
-<meta itemprop="wordCount" content="1835">
+<meta itemprop="wordCount" content="1887">
 
 
 
@@ -153,7 +153,7 @@
     <li><a href="#定位">定位</a>
       <ul>
         <li><a href="#relative">relative</a></li>
-        <li><a href="#absolutere">absolutere</a></li>
+        <li><a href="#absolute">absolute</a></li>
         <li><a href="#居中对其---水平居中">居中对其 - 水平居中</a></li>
         <li><a href="#居中对其---垂直居中">居中对其 - 垂直居中</a></li>
       </ul>
@@ -163,7 +163,15 @@
         <li><a href="#line-height-继承问题">line-height 继承问题</a></li>
       </ul>
     </li>
-    <li><a href="#响应式">响应式</a></li>
+    <li><a href="#响应式">响应式</a>
+      <ul>
+        <li><a href="#rem--em--px">rem / em / px</a></li>
+        <li><a href="#常见方案">常见方案</a></li>
+        <li><a href="#rem-弊端">rem 弊端</a></li>
+        <li><a href="#网页视口尺寸">网页视口尺寸</a></li>
+        <li><a href="#vw--vh--vmax--vmin">vw / vh / vmax / vmin</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -928,7 +936,7 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 <blockquote>
 <p>依据自身定位</p>
 </blockquote>
-<h3 id="absolutere">absolutere</h3>
+<h3 id="absolute">absolute</h3>
 <blockquote>
 <p>依据最近一层定位元素定位<br>
 定位元素：absoulute, relative, fixed 或者 body</p>
@@ -1080,12 +1088,24 @@ document.getElementById(&lsquo;d1&rsquo;).offsetWidth, 返回的是没有 ‘px�
 </div>
 </div><blockquote>
 <ul>
-<li>写具体数值，如 30px，测继承改值</li>
-<li>写比例，如 1.5，测继承该比例</li>
-<li>写百分比，如 20%，测继承计算出来的值</li>
+<li>写具体数值，如 30px，则继承改值</li>
+<li>写比例，如 1.5，则继承该比例</li>
+<li>写百分比，如 20%，则继承计算出来的值</li>
 </ul>
 </blockquote>
 <h2 id="响应式">响应式</h2>
+<h3 id="rem--em--px">rem / em / px</h3>
+<blockquote>
+<ul>
+<li>px: 像素</li>
+<li>em: 相对于父元素的字体大小</li>
+<li>rem: 相对于根元素的字体大小</li>
+</ul>
+</blockquote>
+<h3 id="常见方案">常见方案</h3>
+<h3 id="rem-弊端">rem 弊端</h3>
+<h3 id="网页视口尺寸">网页视口尺寸</h3>
+<h3 id="vw--vh--vmax--vmin">vw / vh / vmax / vmin</h3>
 
     </div>
 
