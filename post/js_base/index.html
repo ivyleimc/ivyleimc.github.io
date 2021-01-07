@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JS 基础 - IvyLei - blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Ivy Lei" /><meta name="description" content="变量类型 值类型和引用类型的区别 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 常见值类型 let a; //undefined const s = &amp;lsquo;abc&amp;rsquo;; //string const n" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.63.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/js_base/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JS 基础" />
+<meta property="og:description" content="变量类型 值类型和引用类型的区别 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 常见值类型 let a; //undefined const s = &lsquo;abc&rsquo;; //string const n" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/js_base/" />
+<meta property="article:published_time" content="2020-08-23T17:23:17+08:00" />
+<meta property="article:modified_time" content="2020-08-23T17:23:17+08:00" />
+<meta itemprop="name" content="JS 基础">
+<meta itemprop="description" content="变量类型 值类型和引用类型的区别 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 常见值类型 let a; //undefined const s = &lsquo;abc&rsquo;; //string const n">
+<meta itemprop="datePublished" content="2020-08-23T17:23:17&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-23T17:23:17&#43;08:00" />
+<meta itemprop="wordCount" content="1007">
+
+
+
+<meta itemprop="keywords" content="Javascript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JS 基础"/>
+<meta name="twitter:description" content="变量类型 值类型和引用类型的区别 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 常见值类型 let a; //undefined const s = &lsquo;abc&rsquo;; //string const n"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Ivy Lei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Ivy Lei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JS 基础</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-23 </span>
+        <div class="post-category">
+            <a href="/categories/javascript/"> Javascript </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#变量类型">变量类型</a>
+      <ul>
+        <li><a href="#值类型和引用类型的区别">值类型和引用类型的区别</a></li>
+        <li><a href="#typeof-可判断的类型">typeof 可判断的类型</a></li>
+        <li><a href="#手写深拷贝">手写深拷贝</a></li>
+      </ul>
+    </li>
+    <li><a href="#类型转换">类型转换</a>
+      <ul>
+        <li><a href="#字符串拼接">字符串拼接</a></li>
+        <li><a href="#-运算符">== 运算符</a></li>
+        <li><a href="#truly-变量-falsely-变量">truly 变量 falsely 变量</a></li>
+        <li><a href="#逻辑判断">逻辑判断</a></li>
+        <li><a href="#if-语句">if 语句</a></li>
+      </ul>
+    </li>
+    <li><a href="#原型和原型链">原型和原型链</a>
+      <ul>
+        <li><a href="#原型链">原型链</a></li>
+        <li><a href="#class">class</a></li>
+        <li><a href="#继承">继承</a></li>
+        <li><a href="#原型">原型</a></li>
+        <li><a href="#instanceof">instanceof</a></li>
+      </ul>
+    </li>
+    <li><a href="#作用域和闭包">作用域和闭包</a>
+      <ul>
+        <li><a href="#作用域">作用域</a></li>
+        <li><a href="#自由变量">自由变量</a></li>
+        <li><a href="#闭包">闭包</a></li>
+        <li><a href="#this">this</a></li>
+      </ul>
+    </li>
+    <li><a href="#异步">异步</a>
+      <ul>
+        <li><a href="#单线程">单线程</a></li>
+        <li><a href="#callback">callback</a></li>
+        <li><a href="#应用场景">应用场景</a></li>
+        <li><a href="#promise">Promise</a></li>
+        <li><a href="#event-loop">event-loop</a></li>
+        <li><a href="#asyncawait">async/await</a></li>
+        <li><a href="#微任务宏任务">微任务/宏任务</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块化">模块化</a>
+      <ul>
+        <li><a href="#es6-moudle">ES6 Moudle</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="变量类型">变量类型</h2>
+<h3 id="值类型和引用类型的区别">值类型和引用类型的区别</h3>
+<p><strong>值类型</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//100
+</span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>栈</th>
+<th></th>
+<th>栈</th>
+<th></th>
+<th>栈</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>value</td>
+<td>key</td>
+<td>value</td>
+<td>key</td>
+<td>value</td>
+</tr>
+<tr>
+<td>a</td>
+<td>100</td>
+<td>a</td>
+<td>100</td>
+<td>a</td>
+<td>200</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>b</td>
+<td>100</td>
+<td>b</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>常见值类型</strong></p>
+<ul>
+<li>let a; //undefined</li>
+<li>const s = &lsquo;abc&rsquo;; //string</li>
+<li>const n = 100; //number</li>
+<li>const b = true; //boolean</li>
+<li>const sy = Symbol(&lsquo;s&rsquo;); //symbol</li>
+</ul>
+</blockquote>
+<p><strong>引用类型</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">object111</span> <span class="o">=</span> <span class="p">{</span><span class="nx">num</span><span class="o">:</span> <span class="mi">20</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">object222</span> <span class="o">=</span> <span class="nx">aaaa</span><span class="p">;</span>
+<span class="nx">object222</span><span class="p">.</span><span class="nx">num</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">object111</span><span class="p">.</span><span class="nx">num</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//21
+</span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th align="center">栈</th>
+<th align="center"></th>
+<th align="center">栈</th>
+<th align="center"></th>
+<th align="center">栈</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">key</td>
+<td align="center">value</td>
+<td align="center">key</td>
+<td align="center">value</td>
+<td align="center">key</td>
+<td align="center">value</td>
+</tr>
+<tr>
+<td align="center">object111</td>
+<td align="center">内存地址1</td>
+<td align="center">object111</td>
+<td align="center">内存地址1</td>
+<td align="center">object111</td>
+<td align="center">内存地址1</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">object222</td>
+<td align="center">内存地址1</td>
+<td align="center">object222</td>
+<td align="center">内存地址1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">内存地址1</td>
+<td align="center">{ num:20 }</td>
+<td align="center">内存地址1</td>
+<td align="center">{ num:20 }</td>
+<td align="center">内存地址1</td>
+<td align="center">{ num:21 }</td>
+</tr>
+<tr>
+<td align="center">key</td>
+<td align="center">val</td>
+<td align="center">key</td>
+<td align="center">value</td>
+<td align="center">key</td>
+<td align="center">value</td>
+</tr>
+<tr>
+<td align="center"><strong>堆</strong></td>
+<td align="center"></td>
+<td align="center"><strong>堆</strong></td>
+<td align="center"></td>
+<td align="center"><strong>堆</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>常见引用类型</strong></p>
+<ul>
+<li>const obj = {x: 100};</li>
+<li>const arr = [&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;];</li>
+<li>const n = null; //特殊引用类型，指针指向空地址</li>
+<li>function fn() {&hellip;} //特殊引用类型，但不用于存储数据，所以没有拷贝复制函数这一说</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>栈从上往下排，堆从下往上排</p>
+</blockquote>
+<h3 id="typeof-可判断的类型">typeof 可判断的类型</h3>
+<blockquote>
+<ul>
+<li>typeof 可以识别所有的值类型</li>
+<li>typeof 可以识别函数</li>
+<li>除函数外的其他引用类型均返回 object</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">s</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">s</span><span class="p">)</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">n</span><span class="p">)</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">b</span><span class="p">)</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">sy</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">sy</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">}</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span><span class="p">)</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr</span><span class="p">)</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">n</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">n</span><span class="p">)</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">fn</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="手写深拷贝">手写深拷贝</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span><span class="nx">num</span><span class="o">:</span> <span class="mi">20</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">b</span><span class="p">.</span><span class="nx">num</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">num</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//20
+</span><span class="c1"></span>
+<span class="kd">function</span> <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span> <span class="o">!==</span> <span class="s1">&#39;object&#39;</span> <span class="o">||</span> <span class="nx">obj</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="kd">let</span> <span class="nx">result</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">result</span> <span class="o">=</span> <span class="p">[</span><span class="p">]</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">result</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">result</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">deepCopy</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="类型转换">类型转换</h2>
+<h3 id="字符串拼接">字符串拼接</h3>
+<blockquote>
+<p>字符串 + 某东西 = 字符串 / 某东西 + 字符串 = 字符串</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">+</span> <span class="mi">0</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">0</span> <span class="o">+</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">+</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">+</span> <span class="kc">true</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">null</span> <span class="o">+</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">+</span> <span class="kc">null</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">undefined</span> <span class="o">+</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">+</span> <span class="kc">undefined</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="p">{</span><span class="p">}</span> <span class="o">+</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span> <span class="c1">//[object Object]10
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span> <span class="o">+</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span> <span class="c1">//function fn() {}10
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>减的话情况就多了</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">0</span> <span class="o">-</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">true</span> <span class="o">-</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">-</span> <span class="kc">true</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span> <span class="o">-</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">-</span> <span class="kc">false</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">null</span> <span class="o">-</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">-</span> <span class="kc">null</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">undefined</span> <span class="o">-</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">-</span> <span class="kc">undefined</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="p">{</span><span class="p">}</span> <span class="o">-</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;10&#39;</span> <span class="o">-</span> <span class="p">{</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="-运算符">== 运算符</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span> <span class="o">==</span> <span class="s1">&#39;100&#39;</span><span class="p">)</span><span class="p">;</span> <span class="c1">//true
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="p">;</span> <span class="c1">//true
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="kc">false</span><span class="p">)</span><span class="p">;</span> <span class="c1">//true
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">false</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="p">;</span> <span class="c1">//true
+</span><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kc">null</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">)</span><span class="p">;</span> <span class="c1">//true
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span><span class="p">...</span><span class="p">}</span><span class="p">;</span>
+<span class="c1">//等价于
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">x</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span><span class="p">...</span><span class="p">}</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>除 == null，其他情况一律用 ===</p>
+</blockquote>
+<h3 id="truly-变量-falsely-变量">truly 变量 falsely 变量</h3>
+<blockquote>
+<ul>
+<li>truly   变量：!!a === true</li>
+<li>falsely 变量：!!a === false</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>0, &ldquo;&quot;, false, null, undefined, NaN 为 falsely 变量（取双反全等于 false），其他都是 truly 变量</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//判断 a 是否为 truly 变量
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span><span class="p">...</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="逻辑判断">逻辑判断</h3>
+<p>自己做做看</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="mi">0</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="mi">10</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">||</span> <span class="s1">&#39;abc&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">!</span><span class="nb">window</span><span class="p">.</span><span class="nx">abc</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="if-语句">if 语句</h3>
+<blockquote>
+<p>if 语句判断的是 truly 变量还是 falsely 变量</p>
+</blockquote>
+<h2 id="原型和原型链">原型和原型链</h2>
+<h3 id="原型链">原型链</h3>
+<p>首先清楚三个点</p>
+<blockquote>
+<ul>
+<li>所有对象都有 [[Prototype]] 内置属性</li>
+<li>所有函数都有 prototype 内置属性</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>通过 new 函数调用法调用函数创建新对象，新对象的 [[Prototype]] 会指向被调用函数的 prototype</li>
+<li>通过 Object.create(fn) 创建新对象，新对象的 [[Prototype]] 会指向被 fn</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>原型链的尽头是 Object.prototype</li>
+</ul>
+</blockquote>
+<p>🌰，栗子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="p">}</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">afn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">fn</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">afn</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj1</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">obj</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><strong>简而言之，沿着 [[Prototype]] 一路往上找直到 Object.prototype，的这条东西就叫原型链</strong></p>
+</blockquote>
+<h3 id="class">class</h3>
+<h3 id="继承">继承</h3>
+<h3 id="原型">原型</h3>
+<h3 id="instanceof">instanceof</h3>
+<h2 id="作用域和闭包">作用域和闭包</h2>
+<h3 id="作用域">作用域</h3>
+<h3 id="自由变量">自由变量</h3>
+<h3 id="闭包">闭包</h3>
+<h3 id="this">this</h3>
+<h2 id="异步">异步</h2>
+<h3 id="单线程">单线程</h3>
+<h3 id="callback">callback</h3>
+<h3 id="应用场景">应用场景</h3>
+<h3 id="promise">Promise</h3>
+<h3 id="event-loop">event-loop</h3>
+<h3 id="asyncawait">async/await</h3>
+<h3 id="微任务宏任务">微任务/宏任务</h3>
+<h2 id="模块化">模块化</h2>
+<h3 id="es6-moudle">ES6 Moudle</h3>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Ivy Lei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-08-23
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/javascript/">Javascript</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/angularjs/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">AngularJs</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/css/">
+            <span class="next-text nav-default">CSS</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ivy Lei</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

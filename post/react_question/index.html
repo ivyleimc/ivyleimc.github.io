@@ -48,7 +48,7 @@
 <meta itemprop="description" content="为什么要写 super(props) super()，执行父类构造函数，初始化 this super(props), 传 props 进去是为了初始化 this.props 1 2 //初始化 this.props, React 内相当于 this.props = props; 不传 props 的话，React 也会在实">
 <meta itemprop="datePublished" content="2020-12-20T13:14:57&#43;08:00" />
 <meta itemprop="dateModified" content="2020-12-20T13:14:57&#43;08:00" />
-<meta itemprop="wordCount" content="1232">
+<meta itemprop="wordCount" content="1303">
 
 
 
@@ -141,6 +141,7 @@
     <li><a href="#react-如何区分-class-和-function">React 如何区分 Class 和 Function</a></li>
     <li><a href="#react-元素的-typeof-属性有什么用">React 元素的 $$typeof 属性有什么用</a></li>
     <li><a href="#setstate-如何知道要做什么">setState 如何知道要做什么</a></li>
+    <li><a href="#class-组件函数组件获取-propsstate-的不同">class 组件/函数组件获取 props，state 的不同</a></li>
   </ul>
 </nav>
   </div>
@@ -424,6 +425,14 @@ React 会检测 element.$$typeof，如果丢失或者无效，会拒绝处理该
 </code></pre></td></tr></table>
 </div>
 </div></blockquote>
+<blockquote>
+<h2 id="class-组件函数组件获取-propsstate-的不同">class 组件/函数组件获取 props，state 的不同</h2>
+<p>首先明确</p>
+<ul>
+<li>函数组件渲染时会捕获当前的 props，state</li>
+<li>class 组件中一般通过 this 来获取 props， state</li>
+</ul>
+</blockquote>
 
     </div>
 
@@ -447,7 +456,11 @@ React 会检测 element.$$typeof，如果丢失或者无效，会拒绝处理该
           <a href="/tags/react/">React</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/js_scope/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">JS 作用域</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/react_hook/">
             <span class="next-text nav-default">React_hook</span>
             <span class="next-text nav-mobile">Next</span>
@@ -483,7 +496,8 @@ React 会检测 element.$$typeof，如果丢失或者无效，会拒绝处理该
 
   <span class="copyright-year">
     &copy; 
-    2020
+    2020 - 
+    2021
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

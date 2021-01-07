@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JS 作用域 - IvyLei - blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Ivy Lei" /><meta name="description" content="作用域 和 自由变量 作用域 全局作用域 函数作用域 块级作用域 自由变量 一个变量在当前作用域没有定义，但被使用了 向上级作用域一层层依次寻找，直到找到为止" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.63.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/js_scope/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JS 作用域" />
+<meta property="og:description" content="作用域 和 自由变量 作用域 全局作用域 函数作用域 块级作用域 自由变量 一个变量在当前作用域没有定义，但被使用了 向上级作用域一层层依次寻找，直到找到为止" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/js_scope/" />
+<meta property="article:published_time" content="2021-01-03T17:10:08+08:00" />
+<meta property="article:modified_time" content="2021-01-03T17:10:08+08:00" />
+<meta itemprop="name" content="JS 作用域">
+<meta itemprop="description" content="作用域 和 自由变量 作用域 全局作用域 函数作用域 块级作用域 自由变量 一个变量在当前作用域没有定义，但被使用了 向上级作用域一层层依次寻找，直到找到为止">
+<meta itemprop="datePublished" content="2021-01-03T17:10:08&#43;08:00" />
+<meta itemprop="dateModified" content="2021-01-03T17:10:08&#43;08:00" />
+<meta itemprop="wordCount" content="930">
+
+
+
+<meta itemprop="keywords" content="JavaScript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JS 作用域"/>
+<meta name="twitter:description" content="作用域 和 自由变量 作用域 全局作用域 函数作用域 块级作用域 自由变量 一个变量在当前作用域没有定义，但被使用了 向上级作用域一层层依次寻找，直到找到为止"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Ivy Lei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Ivy Lei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JS 作用域</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-01-03 </span>
+        <div class="post-category">
+            <a href="/categories/javascript/"> JavaScript </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#作用域-和-自由变量">作用域 和 自由变量</a></li>
+    <li><a href="#闭包">闭包</a></li>
+    <li><a href="#闭包的应用">闭包的应用</a></li>
+    <li><a href="#this">this</a></li>
+    <li><a href="#this-不同场景如何取值">this 不同场景如何取值</a></li>
+    <li><a href="#原型中的-this">原型中的 this</a></li>
+    <li><a href="#手写-bind-函数">手写 bind 函数</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="作用域-和-自由变量">作用域 和 自由变量</h2>
+<blockquote>
+<p><strong>作用域</strong></p>
+<ol>
+<li>全局作用域</li>
+<li>函数作用域</li>
+<li>块级作用域</li>
+</ol>
+<p><strong>自由变量</strong></p>
+<ol>
+<li>一个变量在当前作用域没有定义，但被使用了</li>
+<li>向上级作用域一层层依次寻找，直到找到为止</li>
+<li>如果到全局作用域都没找到，则报错</li>
+</ol>
+<p><strong>自由变量的查找，是在函数定义的地方向上级作用域查找，而不是在执行的地方！！！</strong></p>
+</blockquote>
+<h2 id="闭包">闭包</h2>
+<blockquote>
+<p><strong>函数定义的地方和执行的地方不同</strong>  <br>
+或者说：<br>
+作用域应用的特殊情况：</p>
+<ol>
+<li>函数作为参数被传递</li>
+<li>函数作为返回值被返回</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>重点：如何查找自由变量！！！</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//
+</span><span class="c1"></span><span class="c1">//函数作为参数被传递
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">f1</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="sb">f1 a: </span><span class="si">${</span><span class="nx">a</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//f1();
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">f2</span><span class="p">(</span><span class="nx">fun</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+    <span class="nx">fun</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">f2</span><span class="p">(</span><span class="nx">f1</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 你猜 a 打印出多少
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">//函数作为返回值
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">f3</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="sb">f3 a: </span><span class="si">${</span><span class="nx">a</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">f4</span> <span class="o">=</span> <span class="nx">f3</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">f4</span><span class="p">(</span><span class="p">)</span><span class="p">;</span> <span class="c1">// 你猜 a 打印出多少
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="闭包的应用">闭包的应用</h2>
+<blockquote>
+<p>隐藏数据（不被外界访问），只提供 API</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Exp1</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">setName</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">getName</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span><span class="p">;</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="this">this</h2>
+<blockquote>
+<p><strong>this 的取值是在函数执行时决定的，不是定义时</strong></p>
+</blockquote>
+<h2 id="this-不同场景如何取值">this 不同场景如何取值</h2>
+<blockquote>
+<ul>
+<li>作为普通函数被调用</li>
+<li>使用 call，apply，bind 调用</li>
+<li>作为对象方法被调用</li>
+<li>箭头函数</li>
+<li>setTimeout/setInterval/DOM事件，等的回调函数里</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 作为普通函数被调用
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">f1</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">f1</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// 作为普通函数被调用，this 为 window
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">// 使用 call，apply，bind 调用
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="mi">456</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="mi">789</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj3</span> <span class="o">=</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="mi">987</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">f2</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">f2</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">f2</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">f3</span> <span class="o">=</span> <span class="nx">f2</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">obj3</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">f3</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// 使用 call，apply，bind 调用，this 为 我们提供的对象
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">// 作为对象方法被调用
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">obj4</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">654</span><span class="p">,</span>
+    <span class="nx">f4</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">obj4</span><span class="p">.</span><span class="nx">f4</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// 作为对象方法被调用， this 为该对象
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">// 箭头函数
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">321</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj5</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">654</span><span class="p">,</span>
+    <span class="nx">f5</span><span class="o">:</span> <span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">obj5</span><span class="p">.</span><span class="nx">f5</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">aa</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj6</span> <span class="o">=</span> <span class="p">{</span><span class="nx">aa</span><span class="o">:</span> <span class="mi">987</span><span class="p">}</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">f6</span> <span class="o">=</span> <span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">aa</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">f6</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj6</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// 箭头函数，this 为上一层作用域的 this
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">// setTimeout/setInterval/DOM事件，等的回调函数里
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">aa</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj7</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">aa</span><span class="o">:</span> <span class="mi">654</span><span class="p">,</span>
+    <span class="nx">f7</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">aa</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">obj7</span><span class="p">.</span><span class="nx">f7</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// setTimeout/setInterval/DOM事件，结合了箭头函数
+</span><span class="c1"></span><span class="nx">bb</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj8</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">bb</span><span class="o">:</span> <span class="mi">654</span><span class="p">,</span>
+    <span class="nx">f8</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">bb</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">obj8</span><span class="p">.</span><span class="nx">f8</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">// 再做个看看
+</span><span class="c1"></span><span class="nx">cc</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">obj9</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">cc</span><span class="o">:</span> <span class="mi">654</span><span class="p">,</span>
+    <span class="nx">f9</span><span class="o">:</span> <span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cc</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">obj9</span><span class="p">.</span><span class="nx">f9</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="原型中的-this">原型中的 this</h2>
+<h2 id="手写-bind-函数">手写 bind 函数</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Ivy Lei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-01-03
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/javascript/">JavaScript</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/react_question/">
+            <span class="next-text nav-default">React_question</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ivy Lei</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

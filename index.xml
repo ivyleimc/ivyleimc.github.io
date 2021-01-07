@@ -6,7 +6,7 @@
     <description>Recent content on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 20 Dec 2020 13:14:57 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2021 17:10:08 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>JS 作用域</title>
+      <link>http://localhost:1313/post/js_scope/</link>
+      <pubDate>Sun, 03 Jan 2021 17:10:08 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js_scope/</guid>
+      <description>作用域 和 自由变量 作用域 全局作用域 函数作用域 块级作用域 自由变量 一个变量在当前作用域没有定义，但被使用了 向上级作用域一层层依次寻找，直到找到为止</description>
     </item>
     
     <item>
@@ -89,12 +98,12 @@ It makes use of a variety of open source projects including:
     </item>
     
     <item>
-      <title>JS</title>
-      <link>http://localhost:1313/post/js/</link>
+      <title>JS 基础</title>
+      <link>http://localhost:1313/post/js_base/</link>
       <pubDate>Sun, 23 Aug 2020 17:23:17 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/js/</guid>
-      <description>变量类型 值类型和引用类型 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 引用类型 1 2 3 4 5 let object111 = {num: 20}; let object222 = aaaa;</description>
+      <guid>http://localhost:1313/post/js_base/</guid>
+      <description>变量类型 值类型和引用类型的区别 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 常见值类型 let a; //undefined const s = &amp;lsquo;abc&amp;rsquo;; //string const n</description>
     </item>
     
     <item>
@@ -143,12 +152,12 @@ It makes use of a variety of open source projects including:
     </item>
     
     <item>
-      <title>Prototype</title>
+      <title>JS 原型</title>
       <link>http://localhost:1313/post/js_prototype/</link>
       <pubDate>Tue, 21 Apr 2020 06:36:46 +0800</pubDate>
       
       <guid>http://localhost:1313/post/js_prototype/</guid>
-      <description>1. 原型链 所有对象都有 [[Prototype]] 内置属性，它指向另一个对象，另一个对象也有，一直到 Object.prototype 为至，这便是原型链 1.1 instanceof 所有函数都有 prototype 属性，用 new 函数调用得到一个对象</description>
+      <description>原型链 首先清楚五点个点 所有对象都有 __proto__ 内置属性 所有函数都有 prototype 内置属性 通过 new 函数调用法调用函数创建新对象（或者叫 实例），新对象（实例）的 __proto__ 会指向</description>
     </item>
     
   </channel>
