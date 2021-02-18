@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JS 异步进阶 - IvyLei - blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Ivy Lei" /><meta name="description" content="事件循环 1（only 宏任务） JS 是单线程运行的 异步要基于回调来实现 event loop 就是异步回调的实现原理 代码放到 Call Stack 里执行 有 callback 则放到 Web APIs 等待时机，时机到了" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.63.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/js_async_advance/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JS 异步进阶" />
+<meta property="og:description" content="事件循环 1（only 宏任务） JS 是单线程运行的 异步要基于回调来实现 event loop 就是异步回调的实现原理 代码放到 Call Stack 里执行 有 callback 则放到 Web APIs 等待时机，时机到了" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/js_async_advance/" />
+<meta property="article:published_time" content="2021-01-13T21:20:57+08:00" />
+<meta property="article:modified_time" content="2021-01-13T21:20:57+08:00" />
+<meta itemprop="name" content="JS 异步进阶">
+<meta itemprop="description" content="事件循环 1（only 宏任务） JS 是单线程运行的 异步要基于回调来实现 event loop 就是异步回调的实现原理 代码放到 Call Stack 里执行 有 callback 则放到 Web APIs 等待时机，时机到了">
+<meta itemprop="datePublished" content="2021-01-13T21:20:57&#43;08:00" />
+<meta itemprop="dateModified" content="2021-01-13T21:20:57&#43;08:00" />
+<meta itemprop="wordCount" content="1803">
+
+
+
+<meta itemprop="keywords" content="JavaScript," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JS 异步进阶"/>
+<meta name="twitter:description" content="事件循环 1（only 宏任务） JS 是单线程运行的 异步要基于回调来实现 event loop 就是异步回调的实现原理 代码放到 Call Stack 里执行 有 callback 则放到 Web APIs 等待时机，时机到了"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Ivy Lei</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Ivy Lei</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JS 异步进阶</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-01-13 </span>
+        <div class="post-category">
+            <a href="/categories/javascript/"> JavaScript </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#事件循环-1only-宏任务">事件循环 1（only 宏任务）</a></li>
+    <li><a href="#promise">Promise</a>
+      <ul>
+        <li><a href="#promise-的三个状态">Promise 的三个状态</a></li>
+        <li><a href="#promise-状态如何变化">Promise 状态如何变化</a></li>
+        <li><a href="#thencatch-对状态的影响">then/catch 对状态的影响</a></li>
+      </ul>
+    </li>
+    <li><a href="#asyncawait">async/await</a>
+      <ul>
+        <li><a href="#await-后可跟">await 后可跟？</a></li>
+        <li><a href="#asyncawait-和-promise-的关系">async/await 和 promise 的关系</a></li>
+      </ul>
+    </li>
+    <li><a href="#dom渲染">DOM渲染</a></li>
+    <li><a href="#事件循环-2宏任务dom渲-">事件循环 2（宏任务，DOM渲 ）</a></li>
+    <li><a href="#事件循环-3宏任务dom渲染-微任务">事件循环 3（宏任务，DOM渲染， 微任务）</a></li>
+    <li><a href="#dom-事件和-event-loop">DOM 事件和 event loop</a></li>
+    <li><a href="#forof">for&hellip;of</a></li>
+    <li><a href="#做做看">做做看</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="事件循环-1only-宏任务">事件循环 1（only 宏任务）</h2>
+<blockquote>
+<ol>
+<li>JS 是单线程运行的</li>
+<li>异步要基于回调来实现</li>
+<li>event loop 就是异步回调的实现原理</li>
+</ol>
+</blockquote>
+<div>
+    <img src="/img/js_async_advance_1.png" width="600px">
+</div>
+<blockquote>
+<ol>
+<li>代码放到 Call Stack 里执行</li>
+<li>有 callback 则放到 Web APIs 等待时机，时机到了放到 callback queue</li>
+<li>Call Stack 里的代码执行完了，event loop 启动</li>
+<li>把 callback queue 的 callback 放到 Call Stack 执行</li>
+<li>有 callback 则放到 Web APIs 等待时机，时机到了放到 callback queue</li>
+<li>Call Stack 里的代码执行完了，event loop 启动</li>
+<li>如此反复。。。</li>
+</ol>
+</blockquote>
+<h2 id="promise">Promise</h2>
+<h3 id="promise-的三个状态">Promise 的三个状态</h3>
+<blockquote>
+<ul>
+<li>pending</li>
+<li>fulfilled</li>
+<li>rejected</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>new Promise 里的方法执行了（同步或者异步）resolve()，状态从 pending 变成 fulfilled</li>
+<li>new Promise 里的方法执行了（同步或者异步）reject()，状态从 pending 变成 rejected</li>
+<li>new Promise 里的方法报错了（同步），状态也会变成 rejected</li>
+<li>new Promise 里的方法其他情况, 则一律为 pending</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...
+</span><span class="c1"></span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="nx">p1</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p12</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">123</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p12&#39;</span><span class="p">,</span> <span class="nx">p12</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p122</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="mi">789</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p122&#39;</span><span class="p">,</span> <span class="nx">p122</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p123</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">new</span> <span class="nx">Errorrrrr</span><span class="p">(</span><span class="mi">789</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p123&#39;</span><span class="p">,</span> <span class="nx">p123</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p124</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p124&#39;</span><span class="p">,</span> <span class="nx">p124</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p4 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p124</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p13</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">resolve</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p13&#39;</span><span class="p">,</span> <span class="nx">p13</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p14</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">reject</span><span class="p">(</span><span class="mi">456</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p14&#39;</span><span class="p">,</span> <span class="nx">p14</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p2 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p3</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="nx">p3</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p3 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p3</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="promise-状态如何变化">Promise 状态如何变化</h3>
+<blockquote>
+<ul>
+<li>new Promise 里的方法执行了（同步或者异步）resolve()，状态从 pending 变成 fulfilled</li>
+<li>new Promise 里的方法执行了（同步或者异步）reject()，状态从 pending 变成 rejected</li>
+<li>new Promise 里的方法报错了（同步），状态也会变成 rejected</li>
+<li>new Promise 里的方法其他情况, 则一律为 pending</li>
+<li>状态 fulfilled 会触发 then 回调函数</li>
+<li>状态 rejected 会触发 catch 回调函数</li>
+<li>状态 pending 不会触发 then 和 catch</li>
+</ul>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//new Promise 里的方法
+</span><span class="c1"></span><span class="c1">//执行了 resolve()，状态从 pending 变成 fulfilled
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="nx">p1</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p1 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p1</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//new Promise 里的方法
+</span><span class="c1"></span><span class="c1">//执行了 reject()，状态从 pending 变成 rejected
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="mi">456</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p2 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p2</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//new Promise 里的方法
+</span><span class="c1"></span><span class="c1">//既不执行 resolve() 也不执行 reject()，则状态为 pending
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p3</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">789</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="nx">p3</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p3 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p3</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">//状态 fulfilled 会触发 then 回调函数
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p4</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">con</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p4 then&#39;</span><span class="p">,</span> <span class="nx">con</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p4 catch&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span> <span class="nx">p4</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p4 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p4</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//状态 fulfilled 会触发 then 回调函数
+</span><span class="c1"></span><span class="c1">//即使 then 回调函数 在 catch 回调函数后面
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p5</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p5 catch&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">con</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p5 then&#39;</span><span class="p">,</span> <span class="nx">con</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p5&#39;</span><span class="p">,</span> <span class="nx">p5</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p5 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p5</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//
+</span><span class="c1"></span><span class="c1">//状态 rejected 会触发 catch 回调函数
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p6</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">con</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p6 then&#39;</span><span class="p">,</span> <span class="nx">con</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p6 catch&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p6&#39;</span><span class="p">,</span> <span class="nx">p6</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;p6 setTimeout&#39;</span><span class="p">,</span> <span class="nx">p6</span><span class="p">)</span><span class="p">;</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="thencatch-对状态的影响">then/catch 对状态的影响</h3>
+<blockquote>
+<ul>
+<li>无论是在 then 还是在 catch 的方法里，报错都会让状态变成 rejected</li>
+<li>无论是在 then 还是在 catch 的方法里，只有不报错状态就是 fulfilled</li>
+</ul>
+</blockquote>
+<h2 id="asyncawait">async/await</h2>
+<blockquote>
+<ul>
+<li><strong>感觉是 promise 的一颗语法糖</strong></li>
+<li><strong>可用同步的语法编写异步的代码</strong></li>
+</ul>
+</blockquote>
+<h3 id="await-后可跟">await 后可跟？</h3>
+<blockquote>
+<ul>
+<li>promise</li>
+<li>async function</li>
+<li>值类型的变量或者字面量</li>
+</ul>
+</blockquote>
+<h3 id="asyncawait-和-promise-的关系">async/await 和 promise 的关系</h3>
+<blockquote>
+<ul>
+<li>async/await 用同步的语法编写异步的代码</li>
+<li>和 promise 不互斥，两者相互想成</li>
+<li>执行 async 函数返回的是 promise 对象</li>
+<li>await 相当于 promise 的 then</li>
+<li>try&hellip;catch 可捕获异常，代替 promise 的 catch</li>
+<li>如果 await 后者是个 rejected 状态的 promise 会报错，要用 try&hellip;catch 处理</li>
+</ul>
+</blockquote>
+<h2 id="dom渲染">DOM渲染</h2>
+<blockquote>
+<ul>
+<li>JS 是单线程的</li>
+<li>DOM 渲染和 JS 是公用一个线程的</li>
+<li>JS 执行时要留一些时机给 DOM 渲染</li>
+</ul>
+</blockquote>
+<h2 id="事件循环-2宏任务dom渲-">事件循环 2（宏任务，DOM渲 ）</h2>
+<blockquote>
+<ol>
+<li>代码放到 Call Stack 里执行</li>
+<li>有 callback 则放到 Web APIs 等待时机，时机到了放到 callback queue</li>
+<li>Call Stack 里的代码执行完了</li>
+<li><strong>尝试 DOM 渲染</strong> (不一定每次都会渲染的)</li>
+<li>event loop 启动</li>
+<li>把 callback queue 的 callback 放到 Call Stack 执行</li>
+<li>有 callback 则放到 Web APIs 等待时机，时机到了放到 callback queue</li>
+<li>Call Stack 里的代码执行完了</li>
+<li><strong>尝试 DOM 渲染</strong> (不一定每次都会渲染的)</li>
+<li>event loop 启动</li>
+<li>如此反复。。。</li>
+</ol>
+</blockquote>
+<h2 id="事件循环-3宏任务dom渲染-微任务">事件循环 3（宏任务，DOM渲染， 微任务）</h2>
+<blockquote>
+<ul>
+<li>宏任务：setTimeout, setInterval, Ajax, DOM事件</li>
+<li>微任务：Promise, async/await</li>
+<li>微任务执行时机比宏任务早</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Promise, async/await 是 ES 规范，不是 W3C 规范 <br>
+所以不会经过 Web APIs，执行时机也就有不同</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>微任务： DOM 渲染前执行</li>
+<li>宏任务： DOM 渲染后执行</li>
+</ul>
+</blockquote>
+<div>
+    <img src="/img/js_async_advance_2.png" width="600px">
+</div>
+<blockquote>
+<ol>
+<li>代码放到 Call Stack 里执行</li>
+<li>有 callback 则放到 Web APIs 等待时机，时机到了放到 callback queue
+<ul>
+<li>有 promise 则放到微任务队列里</li>
+</ul>
+</li>
+<li>Call Stack 里的代码执行完了</li>
+<li>把微任务里的代码放到 Call Stack 里执行，直到微任务队列里没东西了</li>
+<li><strong>尝试 DOM 渲染</strong> (不一定每次都会渲染的)</li>
+<li>event loop 启动</li>
+<li>把 callback queue 的 callback 放到 Call Stack 执行</li>
+<li>有 callback 则放到 Web APIs 等待时机，时机到了放到 callback queue
+<ul>
+<li>有 promise 则放到微任务队列里</li>
+</ul>
+</li>
+<li>Call Stack 里的代码执行完了</li>
+<li>把微任务里的代码放到 Call Stack 里执行，直到微任务队列里没东西了</li>
+<li><strong>尝试 DOM 渲染</strong> (不一定每次都会渲染的)</li>
+<li>event loop 启动</li>
+<li>如此反复。。。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>每次 Call Stack 清空，轮询结束</p>
+</blockquote>
+<h2 id="dom-事件和-event-loop">DOM 事件和 event loop</h2>
+<blockquote>
+<p>DOM 事件不是异步，但它和异步一样使用回调，和异步一样基于 event loop</p>
+</blockquote>
+<h2 id="forof">for&hellip;of</h2>
+<blockquote>
+<p>用于异步的遍历</p>
+</blockquote>
+<h2 id="做做看">做做看</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="nx">st1</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;setTimeout1&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;promise1&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;RAF1&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="nx">st2</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;setTimeout2&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;promise2&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;RAF2&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;task1&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;mincro task 1&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;task2&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;mincro task 2&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//document.body.click();
+</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Ivy Lei</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-01-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/javascript/">JavaScript</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/js_async_base/">
+            <span class="next-text nav-default">JS 异步基础</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ivy Lei</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,10 +6,28 @@
     <description>Recent content in JavaScript on IvyLei - blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 03 Jan 2021 17:10:08 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 13 Jan 2021 21:20:57 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JS 异步进阶</title>
+      <link>http://localhost:1313/post/js_async_advance/</link>
+      <pubDate>Wed, 13 Jan 2021 21:20:57 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js_async_advance/</guid>
+      <description>事件循环 1（only 宏任务） JS 是单线程运行的 异步要基于回调来实现 event loop 就是异步回调的实现原理 代码放到 Call Stack 里执行 有 callback 则放到 Web APIs 等待时机，时机到了</description>
+    </item>
+    
+    <item>
+      <title>JS 异步基础</title>
+      <link>http://localhost:1313/post/js_async_base/</link>
+      <pubDate>Sat, 09 Jan 2021 18:29:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/js_async_base/</guid>
+      <description>基础 单线程，同步，异步 JavaScript 是单线程语言 遇到等待（网络请求，定时任务）会卡住 为了不卡住，引入了异步 同步会阻塞代码执行 异步不会阻塞代码执行 异步的主</description>
+    </item>
     
     <item>
       <title>JS 作用域</title>

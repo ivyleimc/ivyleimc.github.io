@@ -44,7 +44,7 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:1313/" />
-<meta property="og:updated_time" content="2021-01-03T17:10:08+08:00" />
+<meta property="og:updated_time" content="2021-01-13T21:20:57+08:00" />
 <meta itemprop="name" content="IvyLei - blog">
 <meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="IvyLei - blog"/>
@@ -115,6 +115,48 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/js_base/">JS 基础</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-08-23 </span>
+      <div class="post-category">
+          <a href="/categories/javascript/"> Javascript </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      变量类型 值类型和引用类型的区别 值类型 1 2 3 4 5 let a = 100; let b = a; a = 200; console.log(b); //100 栈 栈 栈 key value key value key value a 100 a 100 a 200 b 100 b 100 常见值类型 let a; //undefined const s = &lsquo;abc&rsquo;; //string const n
+    </div>
+    <div class="read-more">
+      <a href="/post/js_base/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/css/">CSS</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-08-19 </span>
+      <div class="post-category">
+          <a href="/categories/css/"> CSS </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      布局 盒子模型 一般情况 （没设 box-sizing 或者 box-sizing:content-box） 元素宽度（offsetWidth） = width + padding * 2 + border * 2（没有 m
+    </div>
+    <div class="read-more">
+      <a href="/post/css/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/html/">HTML</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-08-19 </span>
@@ -178,27 +220,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/js_prototype/">JS 原型</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-04-21 </span>
-      <div class="post-category">
-          <a href="/categories/javascript/"> JavaScript </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      原型链 首先清楚五点个点 所有对象都有 __proto__ 内置属性 所有函数都有 prototype 内置属性 通过 new 函数调用法调用函数创建新对象（或者叫 实例），新对象（实例）的 __proto__ 会指向
-    </div>
-    <div class="read-more">
-      <a href="/post/js_prototype/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -206,7 +227,10 @@
         <i class="iconfont icon-left"></i>
         <span class="prev-text">Prev</span>
       </a>
-    
+    <a class="next" href="/page/4/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
   </nav>
         </div>
         
