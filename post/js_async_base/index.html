@@ -48,7 +48,7 @@
 <meta itemprop="description" content="基础 单线程，同步，异步 JavaScript 是单线程语言 遇到等待（网络请求，定时任务）会卡住 为了不卡住，引入了异步 同步会阻塞代码执行 异步不会阻塞代码执行 异步的主">
 <meta itemprop="datePublished" content="2021-01-09T18:29:25&#43;08:00" />
 <meta itemprop="dateModified" content="2021-01-09T18:29:25&#43;08:00" />
-<meta itemprop="wordCount" content="387">
+<meta itemprop="wordCount" content="670">
 
 
 
@@ -140,9 +140,12 @@
     <li><a href="#基础">基础</a>
       <ul>
         <li><a href="#单线程同步异步">单线程，同步，异步</a></li>
-        <li><a href="#回调地狱callback-hell和-promiseasyncawait">回调地狱（callback hell）和 promise，async/await</a></li>
+        <li><a href="#回调地狱callback-hell">回调地狱（callback hell）</a></li>
+        <li><a href="#promise">promise</a></li>
+        <li><a href="#asyncawait">async/await</a></li>
         <li><a href="#异步的主要应用场景">异步的主要应用场景</a></li>
         <li><a href="#手写-promise-加载一张图片">手写 promise 加载一张图片</a></li>
+        <li><a href="#手写-asyncawait-加载一张图片">手写 async/await 加载一张图片</a></li>
       </ul>
     </li>
   </ul>
@@ -198,15 +201,152 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Bye&#39;</span><span class="p">)</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="回调地狱callback-hell和-promiseasyncawait">回调地狱（callback hell）和 promise，async/await</h3>
+</div><h3 id="回调地狱callback-hell">回调地狱（callback hell）</h3>
+<blockquote>
+<ol>
+<li>回调解决了异步问题，但很容易掉进回调地狱</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;demo_test.asp&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">status</span><span class="p">)</span><span class="p">{</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;demo_test1.asp?name=&#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data1</span><span class="p">,</span><span class="nx">status</span><span class="p">)</span><span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;demo_test2.asp?age=&#39;</span> <span class="o">+</span> <span class="nx">data1</span><span class="p">.</span><span class="nx">age</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data2</span><span class="p">,</span><span class="nx">status</span><span class="p">)</span><span class="p">{</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;demo_test3.asp?address=&#39;</span> <span class="o">+</span> <span class="nx">data2</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data3</span><span class="p">,</span><span class="nx">status</span><span class="p">)</span><span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;Data: &#34;</span> <span class="o">+</span> <span class="nx">data3</span> <span class="o">+</span> <span class="s2">&#34;\nStatus: &#34;</span> <span class="o">+</span> <span class="nx">status</span><span class="p">)</span><span class="p">;</span>
+                <span class="c1">//若后面还有，你看是不是很恐怖，像掉进地狱一样
+</span><span class="c1"></span>            <span class="p">}</span><span class="p">)</span>
+        <span class="p">}</span><span class="p">)</span>
+    <span class="p">}</span><span class="p">)</span>
+<span class="p">}</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="promise">promise</h3>
 <blockquote>
 <ol>
 <li>回调解决了异步问题，但很容易掉进回调地狱</li>
 <li>promise 的出现解决了回调地狱的问题，把回调从一层层的嵌套变成了链式，感官上好了很多</li>
-<li>async/await 的出现让我们可以用同步的语法写异步的代码，感官上就更好了，感觉它就是 promise 的语法糖</li>
 </ol>
 </blockquote>
-<h3 id="异步的主要应用场景">异步的主要应用场景</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="p">{</span>
+            <span class="nx">resolve</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">promiseGet</span><span class="p">(</span><span class="s1">&#39;demo_test.asp&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data: &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="s1">&#39;demo_test1.asp?name=&#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data1: &#39;</span> <span class="o">+</span> <span class="nx">data1</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="s1">&#39;demo_test2.asp?age=&#39;</span> <span class="o">+</span> <span class="nx">data1</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data2: &#39;</span> <span class="o">+</span> <span class="nx">data2</span><span class="p">)</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="s1">&#39;demo_test3.asp?address=&#39;</span> <span class="o">+</span> <span class="nx">data2</span><span class="p">.</span><span class="nx">address</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data3: &#39;</span> <span class="o">+</span> <span class="nx">data3</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="asyncawait">async/await</h3>
+<blockquote>
+<ol>
+<li>回调解决了异步问题，但很容易掉进回调地狱</li>
+<li>promise 的出现解决了回调地狱的问题，把回调从一层层的嵌套变成了链式，感官上好了很多</li>
+<li>async/await 的出现让我们可以用同步的语法写异步的代码，感官上就更好了，它就是 promise 的语法糖</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="p">{</span>
+            <span class="nx">resolve</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">getSomething</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="s1">&#39;demo_test.asp&#39;</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data: &#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">)</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">data1</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="s1">&#39;demo_test1.asp?name=&#39;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data1: &#39;</span> <span class="o">+</span> <span class="nx">data1</span><span class="p">)</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">data2</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="s1">&#39;demo_test2.asp?age=&#39;</span> <span class="o">+</span> <span class="nx">data1</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data2: &#39;</span> <span class="o">+</span> <span class="nx">data2</span><span class="p">)</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">data3</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">promiseGet</span><span class="p">(</span><span class="s1">&#39;demo_test3.asp?age=&#39;</span> <span class="o">+</span> <span class="nx">data1</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Data3: &#39;</span> <span class="o">+</span> <span class="nx">data3</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">getSomething</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="异步的主要应用场景">异步的主要应用场景</h3>
 <blockquote>
 <ol>
 <li>网络请求</li>
@@ -280,7 +420,9 @@
 <span class="p">}</span><span class="p">)</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><h3 id="手写-asyncawait-加载一张图片">手写 async/await 加载一张图片</h3>
+<p>&hellip;</p>
+
     </div>
 
     <div class="post-copyright">
