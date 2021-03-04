@@ -48,7 +48,7 @@
 <meta itemprop="description" content="Promise Promise 的三个状态 pending fulfilled rejected 猜猜下面的状态 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53">
 <meta itemprop="datePublished" content="2021-01-13T21:20:57&#43;08:00" />
 <meta itemprop="dateModified" content="2021-01-13T21:20:57&#43;08:00" />
-<meta itemprop="wordCount" content="1213">
+<meta itemprop="wordCount" content="1498">
 
 
 
@@ -144,10 +144,15 @@
         <li><a href="#状态变化-2-thencatch-对状态的影响">状态变化 2: then/catch 对状态的影响</a></li>
         <li><a href="#promiseresolve">Promise.resolve()</a></li>
         <li><a href="#promisereject">Promise.reject()</a></li>
+      </ul>
+    </li>
+    <li><a href="#asyncawait">async/await</a>
+      <ul>
         <li><a href="#asyncawait-和-promise-的关系">async/await 和 promise 的关系</a></li>
         <li><a href="#await-后可跟">await 后可跟？</a></li>
       </ul>
     </li>
+    <li><a href="#forof">for&hellip;of</a></li>
   </ul>
 </nav>
   </div>
@@ -307,7 +312,7 @@
 <li>new Promise 里的方法执行了（同步或者异步）resolve()，状态从 pending 变成 fulfilled</li>
 <li>new Promise 里的方法执行了（同步或者异步）reject()，状态从 pending 变成 rejected</li>
 <li>new Promise 里的方法报错了（同步），状态也会变成 rejected</li>
-<li>new Promise 里的方法报错了（异步），状态也会变成 pending</li>
+<li>new Promise 里的方法报错了（异步），状态只会维持 pending</li>
 <li>new Promise 里的方法其他情况, 则一律为 pending</li>
 </ul>
 </blockquote>
@@ -565,7 +570,14 @@
 <span class="p">}</span><span class="p">)</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="asyncawait-和-promise-的关系">async/await 和 promise 的关系</h3>
+</div><h2 id="asyncawait">async/await</h2>
+<blockquote>
+<ul>
+<li><strong>是 promise 的一颗语法糖</strong></li>
+<li><strong>可用同步的语法编写异步的代码</strong></li>
+</ul>
+</blockquote>
+<h3 id="asyncawait-和-promise-的关系">async/await 和 promise 的关系</h3>
 <blockquote>
 <ul>
 <li>async/await 用同步的语法编写异步的代码</li>
@@ -614,6 +626,29 @@
 </span><span class="lnt">33
 </span><span class="lnt">34
 </span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">//猜猜是啥状态
@@ -651,6 +686,29 @@
     <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="nx">resolve</span><span class="p">(</span><span class="mi">345</span><span class="p">)</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">afn3</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//猜猜是啥状态
+</span><span class="c1"></span><span class="nx">async</span> <span class="kd">function</span> <span class="nx">afn4</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">afn4</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;catch &#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="c1">//
+</span><span class="c1"></span><span class="c1">//猜猜是啥状态
+</span><span class="c1"></span><span class="nx">async</span> <span class="kd">function</span> <span class="nx">afn5</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="p">(</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">new</span> <span class="nx">eeeeerrrrr</span><span class="p">(</span><span class="mi">444</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">afn5</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;catch &#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="await-后可跟">await 后可跟？</h3>
@@ -661,7 +719,64 @@
 <li>值类型的变量或者字面量</li>
 </ul>
 </blockquote>
+<h2 id="forof">for&hellip;of</h2>
+<blockquote>
+<p>用于异步的遍历  <br>
+当 for&hellip;of 体内有一部分代码置身于异步时（await 下面的行），会等这个异步有结果了才到下一轮循环</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">waitSomeTime</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span> <span class="nx">rej</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">res</span><span class="p">(</span><span class="nx">n</span> <span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="p">;</span>
+        <span class="p">}</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="p">;</span>
 
+<span class="c1">//一次过循环完，带异步有结果就打印出来
+</span><span class="c1"></span><span class="nx">a</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">async</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">waitSomeTime</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;forEach: &#39;</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span><span class="p">;</span>
+<span class="p">}</span><span class="p">)</span>
+
+<span class="c1">//等待每次循环里的异步有结果后，才到下一次
+</span><span class="c1"></span><span class="nx">async</span> <span class="kd">function</span> <span class="nx">asyncFn</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="nx">e</span> <span class="k">of</span> <span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">waitSomeTime</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;forOf: &#39;</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">asyncFn</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
